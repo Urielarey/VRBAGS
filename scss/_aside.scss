@@ -1,0 +1,122 @@
+.catalogo{
+    @include ucard(flex, row, space-around, center);
+    padding: 30px;
+    font-family: montserrat2;
+    padding-bottom: 6.25rem;
+}
+.catalogo a{
+    text-decoration: none;
+}
+.remeras{
+    background-color: $second-color;
+    color: #fff;
+    width: 18.75rem;
+    height: 18.75rem;
+    text-align: center;
+    border-radius: .625rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    @include uflex(flex, center, center);
+    &:hover {
+        transform: scale(1.01);
+        background-color: #fff;
+        transform: scale(1.01);
+        color: $second-color;
+        border-width: .125rem;
+        border-color: $second-color;
+        border-style: solid;
+    }
+}
+.buzos{
+    background-color: $second-color;
+    color: #fff;
+    width: 18.75rem;
+    height: 18.75rem;
+    text-align: center;
+    border-radius: .625rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    @include uflex(flex, center, center);
+    &:hover {
+        transform: scale(1.01);
+        background-color: #fff;
+        transform: scale(1.01);
+        color: $second-color;
+        border-width: .125rem;
+        border-color: $second-color;
+        border-style: solid;
+    }
+}
+.short{
+    background-color: $second-color;
+    color: #fff;
+    width: 18.75rem;
+    height: 18.75rem;
+    text-align: center;
+    border-radius: .625rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    @include uflex(flex, center, center);
+    &:hover {
+        transform: scale(1.01);
+        background-color: #fff;
+        transform: scale(1.01);
+        color: $second-color;
+        border-width: .125rem;
+        border-color: $second-color;
+        border-style: solid;
+    }
+}
+.titleaside h2{
+    text-align: center;
+    padding: 1.875rem;
+    font-family: montserrat;
+}
+@media (max-width: $mobile) {
+
+    .catalogo {
+        @include ucard(flex, column, center, center);
+    }
+    .remeras{
+        width: 12.5rem;
+        height: 12.5rem;
+        padding: 1.25rem;
+        margin: 1.25rem;
+    }
+    .buzos{
+        width: 12.5rem;
+        height: 12.5rem;
+        padding: 1.25rem;
+        margin: 1.25rem;
+    }
+    .short{
+        width: 12.5rem;
+        height: 12.5rem;
+        padding: 1.25rem;
+        margin: 1.25rem;
+    }
+}
+@media (max-width: $tablet) {
+    .catalogo {
+        @include ucard(flex, column, center, center);
+    }
+    .remeras{     
+        width: 12.5rem;
+        height: 12.5rem;
+        padding: 1.25rem;
+        margin: 1.25rem;
+
+    }
+    .buzos{
+        width: 12.5rem;
+        height: 12.5rem;
+        padding: 1.25rem;
+        margin: 1.25rem;
+    }
+    .short{
+        width: 12.5rem;
+        height: 12.5rem;
+        padding: 1.25rem;
+        margin: 1.25rem;
+    }
+}

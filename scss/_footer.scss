@@ -1,0 +1,16 @@
+footer{
+    @include ucard(flex, column, center, center);
+    background-color: $second-color;
+    padding: 1.875rem;
+    color: #fff;
+    text-align: center;
+    font-family: montserrat3;
+}
+a.sin-decoracion {
+    text-decoration: none;
+    color: #fff;
+    &:hover {
+        transform: scale(1.01);
+        color: #F7E8A4;
+    }
+}

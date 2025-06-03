@@ -1,0 +1,35 @@
+.u-envios{
+    display: flex;
+    justify-content: center;
+    background-color: $second-color;
+    color: #fff;
+    padding: .125rem;
+    font-family: montserrat3;
+}
+nav{
+    font-family: montserrat;
+}
+.scroll-up-btn {
+    transition: all 0.3s ease;
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    text-decoration: none;
+    background-color: #333;
+    color: #ffffff;
+    padding: .625rem .9375rem;
+    border-radius: 3.125rem;
+    font-size: 1.25rem;
+    display: inline-block;
+    z-index: 1000;
+    position: fixed;
+    bottom: 1.25rem;
+    right: 1.25rem;
+    border: none;
+    cursor: pointer;
+}
+.scroll-up-btn:hover {
+    background-color: #555;
+    transform: scale(1.01);
+}
+

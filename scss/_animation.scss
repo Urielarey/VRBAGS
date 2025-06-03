@@ -1,0 +1,8 @@
+.fadeIn{
+    opacity: 0;
+    animation: myAnimation 0.5s infinite;
+}
+@keyframes myAnimation{
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}

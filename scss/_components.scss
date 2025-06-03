@@ -1,0 +1,318 @@
+@import "_mixins";
+
+/*Styles del index*/
+.winter{
+    background-color: $second-color;
+    width: 100%;
+    .winterArticle{
+        @include uflex(flex, center, center);
+        padding-top: 1.25rem;
+        padding-bottom: 3.125rem;
+        color: #fff;
+        font-family: montserrat;
+    }
+    .mi-carousel {
+        max-width: 18.75rem;
+        max-height: 21.875rem;
+    }
+    .mi-carousel img {
+        object-fit: cover;
+        height: 100%;
+    }
+}
+.u-destacado {
+    @include ucard(flex, row, center, center);
+    .imgdestacado{
+        padding-top: 1.875rem;
+        padding-bottom: 3.125rem;
+        padding-right: 1.25rem;
+        padding-left: 1.25rem;
+    }
+    a{
+        margin: 15px;
+    }
+}
+.button{
+    background-color: $second-color;
+    border-radius: .3125rem;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: montserrat;
+    padding: .625rem;
+    &:hover {
+        background-color: #fff;
+        transform: scale(1.01);
+        color: $second-color;
+    }
+}
+
+/*Styles del Contacto*/
+.contacto{
+    background-color: $second-color;
+    margin-bottom: 3.125rem;
+    .form-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 3.125rem 1.25rem;
+        font-family: montserrat3;
+    }
+    .form-container {
+        background: white;
+        padding: 1.25rem;
+        border-radius: .5rem;
+        box-shadow: 0 0 .625rem rgba(0, 0, 0, 0.1);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: .625rem;
+        width: 100%;
+        max-width: 25rem;
+    }
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: .625rem;
+    }
+    label {
+        margin-top: .625rem;
+    }
+    input,textarea {
+        width: 100%;
+        padding: .625rem;
+        border: .0625rem solid #ccc;
+        border-radius: .25rem;
+        resize: vertical;
+    }
+    .send {
+        width: 100%;
+        padding: .625rem;
+        background-color: $second-color;
+        color: white;
+        border-width: .0625rem;
+        border-color: #fff;
+        border-style: solid;
+        border-radius: .25rem;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .send:hover {
+        background-color: #fff;
+        color: $second-color;
+        border-width: .0625rem;
+        border-color: $second-color;
+        border-style: solid;
+    }
+    .contactame {
+        color: #5e5757;
+        font-size: .75rem;
+        padding-top: .625rem;
+        text-align: center;
+    }
+}
+
+/*Styles del sucursales*/
+.maps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+    gap: 1.875rem;
+    justify-items: center;
+    padding: 1.25rem;
+    .map-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    iframe {
+        width: 100%;
+        max-width: 37.5rem;
+        height: 28.125rem;
+        border: none;
+    }
+    h5 {
+        margin-top: .625rem;
+        text-align: center;
+        font-family: montserrat3;
+        padding: 1.25rem;
+    }
+    }
+}
+/*Styles del ayuda*/
+.h4{
+    font-family: montserrat2;
+    text-align: center;
+    padding-top: 1.875rem;
+    padding-bottom: 1.25rem;
+}
+.accordion-button:not(.collapsed) {
+    background-color: white !important;
+    color: black !important;
+    box-shadow: none;
+}
+.cambios{
+
+    .cambiosp{
+        width: 50%;
+        font-family: montserrat3;
+        text-align: center;
+    }
+    .h6{
+        text-align: center;
+        font-family: montserrat2;
+    }
+    li{
+        @include uflex(flex, center, center);
+        font-family: montserrat3;
+        padding: .625rem;
+        list-style: none;
+    }
+}
+
+
+.cuidado{
+    li{
+        @include uflex(flex, center, center);
+        font-family: montserrat3;
+        padding-bottom: 1.875rem;
+        list-style: none;
+    }
+    ul{
+        padding: .625rem;
+    }
+    p{
+        text-align: center;
+        font-family: montserrat3;
+    }
+}
+/*Styles para remeras, buzos y short*/
+.catalogos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    justify-content: center;
+    padding: 2rem;
+    .card {
+        justify-self: center;
+    }
+}
+
+/*Styles para carrito*/
+.carrito {
+    border-bottom: .0625rem solid;
+    @include ucard(flex, column, center, center);
+    padding-bottom: 6.25rem;
+.carrito a{
+    text-decoration: none;
+}
+button{
+    margin: 1.25rem;
+}
+}
+
+/*Media queries*/
+@media (max-width: $mobile) {
+    .u-destacado{
+        @include ucard(flex, column, center, center);
+    }
+    .maps{
+        @include ucard(flex, column, center, center);
+    }
+    .map-item {
+        width: 12.5rem;
+        height: 12.5rem;
+        @include uflex(flex, center, center);
+        padding: 1.25rem;
+    }
+    .maph5{
+        display: none;
+    }
+    .h4 {
+        font-family: montserrat2;
+        text-align: center;
+        padding-top: 1.25rem;
+        padding-bottom: .9375rem;
+    }
+    
+    .accordion-button:not(.collapsed) {
+        background-color: white !important;
+        color: black !important;
+        box-shadow: none;
+    }
+    
+    .cambios h6 {
+        text-align: center;
+        font-family: montserrat2;
+    }
+    
+    .contenedorp {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: .625rem;
+    }
+
+    .cambios{
+        .cambiosp {
+            width: 90%;
+            font-family: montserrat3;
+            text-align: center;
+        }
+    }
+
+    .cambios li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: montserrat3;
+        padding: .5rem;
+        list-style: none;
+        text-align: center;
+    }
+
+    .cuidado li {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: montserrat3;
+        padding-bottom: 1rem;
+        list-style: none;
+        text-align: center;
+    }
+    
+    .cuidado ul {
+        padding: .625rem;
+    }
+    
+    .cuidado p {
+        text-align: center;
+        font-family: montserrat3;
+        padding: 0 .625rem;
+    }
+    .catalogos{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+@media (max-width: $tablet) {
+
+    .u-destacado{
+        @include ucard(flex, column, center, center);
+    }
+    .maps{
+        @include ucard(flex, column, center, center);
+    }
+    .map-item {
+        width: 15.625rem;
+        height: 15.625rem;
+        @include uflex(flex, center, center);
+        padding: 1.25rem;
+    }
+    .maph5{
+        display: none;
+    }
+    .catalogos{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
