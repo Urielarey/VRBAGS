@@ -2,34 +2,164 @@
   padding: 0;
   margin: 0;
   box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Importar todas las fuentes Montserrat */
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-Thin.ttf") format("truetype");
+  font-weight: 100;
+  font-style: normal;
 }
 
 @font-face {
-  font-family: montserrat;
-  src: url("../assets/fonts/Montserrat-SemiBold.ttf") format("truetype");
-  font-weight: 400;
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-ThinItalic.ttf") format("truetype");
+  font-weight: 100;
+  font-style: italic;
 }
+
 @font-face {
-  font-family: montserrat2;
-  src: url("../assets/fonts/Montserrat-Medium.ttf") format("truetype");
-  font-weight: 400;
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
 }
+
 @font-face {
-  font-family: montserrat3;
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-ExtraLightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat';
   src: url("../assets/fonts/Montserrat-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-Regular.ttf") format("truetype");
   font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-MediumItalic.ttf") format("truetype");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url("../assets/fonts/Montserrat-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+/* Variables CSS para colores */
+:root {
+  --color-primary: #000000;
+  --color-secondary: #ffffff;
+  --color-accent: #333333;
+  --color-text: #000000;
+  --color-text-light: #666666;
+  --color-background: #ffffff;
+  --color-background-alt: #f8f9fa;
+  --color-border: #e9ecef;
+  --color-success: #28a745;
+  --color-danger: #dc3545;
+  --color-warning: #ffc107;
+  --color-info: #17a2b8;
 }
 .u-envios {
   display: flex;
   justify-content: center;
-  background-color: #191716;
-  color: #fff;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
   padding: 0.125rem;
-  font-family: montserrat3;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
 }
 
 nav {
-  font-family: montserrat;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 }
 
 .scroll-up-btn {
@@ -38,28 +168,27 @@ nav {
   bottom: 1.25rem;
   right: 1.25rem;
   text-decoration: none;
-  background-color: #333;
-  color: #ffffff;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
   padding: 0.625rem 0.9375rem;
   border-radius: 3.125rem;
   font-size: 1.25rem;
   display: inline-block;
   z-index: 1000;
-  position: fixed;
-  bottom: 1.25rem;
-  right: 1.25rem;
   border: none;
   cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 }
 
 .scroll-up-btn:hover {
-  background-color: #555;
+  background-color: var(--color-accent);
   transform: scale(1.01);
 }
 
 /*Styles del index*/
 .winter {
-  background-color: #191716;
+  background-color: var(--color-primary);
   width: 100%;
 }
 .winter .winterArticle {
@@ -68,8 +197,9 @@ nav {
   align-items: center;
   padding-top: 1.25rem;
   padding-bottom: 3.125rem;
-  color: #fff;
-  font-family: montserrat;
+  color: var(--color-secondary);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 }
 .winter .mi-carousel {
   max-width: 18.75rem;
@@ -97,23 +227,24 @@ nav {
 }
 
 .button {
-  background-color: #191716;
+  background-color: var(--color-primary);
   border-radius: 0.3125rem;
-  color: #fff;
+  color: var(--color-secondary);
   cursor: pointer;
   transition: all 0.3s ease;
-  font-family: montserrat;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
   padding: 0.625rem;
 }
 .button:hover {
-  background-color: #fff;
+  background-color: var(--color-secondary);
   transform: scale(1.01);
-  color: #191716;
+  color: var(--color-primary);
 }
 
 /*Styles del Contacto*/
 .contacto {
-  background-color: #191716;
+  background-color: var(--color-primary);
   margin-bottom: 3.125rem;
 }
 .contacto .form-wrapper {
@@ -121,7 +252,8 @@ nav {
   justify-content: center;
   align-items: center;
   padding: 3.125rem 1.25rem;
-  font-family: montserrat3;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
 }
 .contacto .form-container {
   background: white;
@@ -151,20 +283,22 @@ nav {
 .contacto .send {
   width: 100%;
   padding: 0.625rem;
-  background-color: #191716;
-  color: white;
+  background-color: var(--color-primary);
+  color: var(--color-secondary);
   border-width: 0.0625rem;
-  border-color: #fff;
+  border-color: var(--color-secondary);
   border-style: solid;
   border-radius: 0.25rem;
   cursor: pointer;
   transition: all 0.3s ease;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
 }
 .contacto .send:hover {
-  background-color: #fff;
-  color: #191716;
+  background-color: var(--color-secondary);
+  color: var(--color-primary);
   border-width: 0.0625rem;
-  border-color: #191716;
+  border-color: var(--color-primary);
   border-style: solid;
 }
 .contacto .contactame {

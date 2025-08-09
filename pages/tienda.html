@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="VRBAGS - Bolsos de calidad, cómodos y auténticos. Envíos a todo el país. ¡Llevá tu estilo!"
+    />
+    <meta name="author" content="VRBAGS" />
+    <meta
+      name="keywords"
+      content="Bolsos, Mochilas, Riñoneras, Monederos, VRBAGS, Accesorios"
+    />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>VRBAGS - Tienda</title>
+    <link rel="icon" type="image/png" href="../assets/VR BAGS.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css"
+      rel="stylesheet"
+    />
+    <style>
+      .product-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+        border: 1px solid var(--color-border);
+        background: var(--color-background);
+      }
+      .product-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        border-color: var(--color-primary);
+      }
+      .product-image {
+        height: 300px;
+        object-fit: contain;
+        width: 100%;
+        padding: 10px;
+        background: var(--color-background-alt);
+      }
+      .price {
+        font-size: 1.2rem;
+        font-weight: bold;
+        color: var(--color-success);
+        font-family: 'Montserrat', sans-serif;
+      }
+      .add-to-cart-btn {
+        width: 100%;
+        margin-top: 10px;
+        background-color: var(--color-primary);
+        border-color: var(--color-primary);
+        color: var(--color-secondary);
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+      .add-to-cart-btn:hover {
+        background-color: var(--color-accent);
+        border-color: var(--color-accent);
+        transform: translateY(-2px);
+      }
+      .category-title {
+        color: var(--color-text);
+        margin-bottom: 30px;
+        text-align: center;
+        font-weight: 700;
+        font-family: 'Montserrat', sans-serif;
+        font-size: 2rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .products-section {
+        margin-bottom: 50px;
+        padding: 20px 0;
+      }
+      .card-title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 600;
+        color: var(--color-text);
+      }
+      .card-text {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        color: var(--color-text-light);
+      }
+      .display-4 {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 900;
+        color: var(--color-primary);
+      }
+      .lead {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 400;
+        color: var(--color-text-light);
+      }
+    </style>
+  </head>
+  <body id="top">
+    <a href="#top" class="scroll-up-btn">↑</a>
+    <header>
+      <article class="u-envios">
+        <h6>Envío a todo el país 🚚</h6>
+      </article>
+      <nav class="navbar navbar-expand-lg fixed-top" style="background-color: var(--color-secondary); border-bottom: 2px solid var(--color-primary);">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="../index.html" style="color: var(--color-primary); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.5rem;">VRBAGS</a>
+          <a
+            class="navbar-brand ms-auto d-lg-none position-relative"
+            href="carrito.html"
+          >
+            <img
+              src="../assets/carrito2.PNG"
+              alt="Carrito"
+              width="30"
+              height="24"
+            />
+            <span
+              id="cart-count"
+              class="u-cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill"
+            >
+              0
+            </span>
+          </a>
+          <button
+            aria-label="menu"
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNavDropdown"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav me-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="../index.html" style="color: var(--color-text); font-family: 'Montserrat', sans-serif; font-weight: 500;">Inicio</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="tienda.html" style="color: var(--color-primary); font-family: 'Montserrat', sans-serif; font-weight: 700;">Tienda</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="contacto.html" style="color: var(--color-text); font-family: 'Montserrat', sans-serif; font-weight: 500;">Contacto</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="ayuda.html" style="color: var(--color-text); font-family: 'Montserrat', sans-serif; font-weight: 500;">Ayuda</a>
+              </li>
+            </ul>
+            <a
+              class="navbar-brand d-none d-lg-block position-relative"
+              href="carrito.html"
+            >
+              <img
+                src="../assets/carrito2.PNG"
+                alt="Carrito"
+                width="30"
+                height="24"
+              />
+              <span
+                id="cart-count"
+                class="u-cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill"
+              >
+                0
+              </span>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
+    
+    <main style="margin-top: 120px;">
+      <div class="container">
+        <section class="text-center mb-5">
+          <h1 class="display-4 fw-bold text-primary">VRBAGS</h1>
+          <p class="lead">Descubrí nuestra colección de bolsos y accesorios</p>
+        </section>
+
+        <!-- Bolsos Miri -->
+        <section class="products-section">
+          <h2 class="category-title">Bolsos Miri</h2>
+          <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Bolso Miri Grande Amarillo.jpg" class="card-img-top product-image" alt="Bolso Miri Grande Amarillo">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Bolso Miri Grande Amarillo</h5>
+                  <p class="card-text">Bolso elegante y espacioso, perfecto para el día a día.</p>
+                  <p class="price">$45.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="miri-grande-amarillo"
+                          data-nombre="Bolso Miri Grande Amarillo"
+                          data-precio="45000"
+                          data-imagen="../assets/Bolso Miri Grande Amarillo.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Bolso Miri Grande Marron.jpg" class="card-img-top product-image" alt="Bolso Miri Grande Marron">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Bolso Miri Grande Marrón</h5>
+                  <p class="card-text">Bolso clásico en marrón, ideal para cualquier ocasión.</p>
+                  <p class="price">$45.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="miri-grande-marron"
+                          data-nombre="Bolso Miri Grande Marrón"
+                          data-precio="45000"
+                          data-imagen="../assets/Bolso Miri Grande Marron.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Bolso Miri Grande Violeta.jpg" class="card-img-top product-image" alt="Bolso Miri Grande Violeta">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Bolso Miri Grande Violeta</h5>
+                  <p class="card-text">Bolso vibrante en violeta, para destacar tu personalidad.</p>
+                  <p class="price">$45.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="miri-grande-violeta"
+                          data-nombre="Bolso Miri Grande Violeta"
+                          data-precio="45000"
+                          data-imagen="../assets/Bolso Miri Grande Violeta.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Bolso Miri Mediano Marron.jpg" class="card-img-top product-image" alt="Bolso Miri Mediano Marron">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Bolso Miri Mediano Marrón</h5>
+                  <p class="card-text">Tamaño mediano perfecto para el trabajo o salidas casuales.</p>
+                  <p class="price">$38.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="miri-mediano-marron"
+                          data-nombre="Bolso Miri Mediano Marrón"
+                          data-precio="38000"
+                          data-imagen="../assets/Bolso Miri Mediano Marron.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Bolso Miri Mediano Rojo.jpg" class="card-img-top product-image" alt="Bolso Miri Mediano Rojo">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Bolso Miri Mediano Rojo</h5>
+                  <p class="card-text">Bolso en rojo vibrante, perfecto para agregar color a tu outfit.</p>
+                  <p class="price">$38.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="miri-mediano-rojo"
+                          data-nombre="Bolso Miri Mediano Rojo"
+                          data-precio="38000"
+                          data-imagen="../assets/Bolso Miri Mediano Rojo.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Bolso Miri Mediano Verde.jpg" class="card-img-top product-image" alt="Bolso Miri Mediano Verde">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Bolso Miri Mediano Verde</h5>
+                  <p class="card-text">Bolso en verde naturaleza, elegante y versátil.</p>
+                  <p class="price">$38.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="miri-mediano-verde"
+                          data-nombre="Bolso Miri Mediano Verde"
+                          data-precio="38000"
+                          data-imagen="../assets/Bolso Miri Mediano Verde.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bolsos Caktus -->
+        <section class="products-section">
+          <h2 class="category-title">Bolsos Caktus</h2>
+          <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Caktus Beige.jpg" class="card-img-top product-image" alt="Caktus Beige">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Caktus Beige</h5>
+                  <p class="card-text">Bolso elegante en beige, perfecto para looks minimalistas.</p>
+                  <p class="price">$42.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="caktus-beige"
+                          data-nombre="Caktus Beige"
+                          data-precio="42000"
+                          data-imagen="../assets/Caktus Beige.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Caktus Marron.jpg" class="card-img-top product-image" alt="Caktus Marron">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Caktus Marrón</h5>
+                  <p class="card-text">Bolso clásico en marrón, versátil para cualquier ocasión.</p>
+                  <p class="price">$42.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="caktus-marron"
+                          data-nombre="Caktus Marrón"
+                          data-precio="42000"
+                          data-imagen="../assets/Caktus Marron.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bolsos Cata -->
+        <section class="products-section">
+          <h2 class="category-title">Bolsos Cata</h2>
+          <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Cata Marron.jpg" class="card-img-top product-image" alt="Cata Marron">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Cata Marrón</h5>
+                  <p class="card-text">Bolso elegante en marrón, perfecto para el trabajo.</p>
+                  <p class="price">$48.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="cata-marron"
+                          data-nombre="Cata Marrón"
+                          data-precio="48000"
+                          data-imagen="../assets/Cata Marron.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Cata Negra.jpg" class="card-img-top product-image" alt="Cata Negra">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Cata Negra</h5>
+                  <p class="card-text">Bolso clásico en negro, esencial para cualquier guardarropa.</p>
+                  <p class="price">$48.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="cata-negra"
+                          data-nombre="Cata Negra"
+                          data-precio="48000"
+                          data-imagen="../assets/Cata Negra.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bolsos Emilio -->
+        <section class="products-section">
+          <h2 class="category-title">Bolsos Emilio</h2>
+          <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Emilio Smail Marron.jpg" class="card-img-top product-image" alt="Emilio Small Marron">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Emilio Small Marrón</h5>
+                  <p class="card-text">Bolso pequeño y elegante, ideal para salidas nocturnas.</p>
+                  <p class="price">$35.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="emilio-small-marron"
+                          data-nombre="Emilio Small Marrón"
+                          data-precio="35000"
+                          data-imagen="../assets/Emilio Smail Marron.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Bolsos Golfera -->
+        <section class="products-section">
+          <h2 class="category-title">Bolsos Golfera</h2>
+          <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Golfera Marron.jpg" class="card-img-top product-image" alt="Golfera Marron">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Golfera Marrón</h5>
+                  <p class="card-text">Bolso deportivo en marrón, perfecto para el día a día.</p>
+                  <p class="price">$32.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="golfera-marron"
+                          data-nombre="Golfera Marrón"
+                          data-precio="32000"
+                          data-imagen="../assets/Golfera Marron.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Golfera Negra.jpg" class="card-img-top product-image" alt="Golfera Negra">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Golfera Negra</h5>
+                  <p class="card-text">Bolso deportivo en negro, versátil y funcional.</p>
+                  <p class="price">$32.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="golfera-negra"
+                          data-nombre="Golfera Negra"
+                          data-precio="32000"
+                          data-imagen="../assets/Golfera Negra.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Golfera Roja.jpg" class="card-img-top product-image" alt="Golfera Roja">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Golfera Roja</h5>
+                  <p class="card-text">Bolso deportivo en rojo, para agregar color a tu outfit.</p>
+                  <p class="price">$32.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="golfera-roja"
+                          data-nombre="Golfera Roja"
+                          data-precio="32000"
+                          data-imagen="../assets/Golfera Roja.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Mini Chini -->
+        <section class="products-section">
+          <h2 class="category-title">Mini Chini</h2>
+          <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Mini Chini Marron Costado.jpg" class="card-img-top product-image" alt="Mini Chini Marron Costado">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Mini Chini Marrón - Vista Costado</h5>
+                  <p class="card-text">Mini bolso elegante en marrón, perfecto para salidas casuales.</p>
+                  <p class="price">$28.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="mini-chini-marron"
+                          data-nombre="Mini Chini Marrón"
+                          data-precio="28000"
+                          data-imagen="../assets/Mini Chini Marron Costado.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Mini Chini Marron Frente.jpg" class="card-img-top product-image" alt="Mini Chini Marron Frente">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Mini Chini Marrón - Vista Frente</h5>
+                  <p class="card-text">Mini bolso elegante en marrón, diseño compacto y funcional.</p>
+                  <p class="price">$28.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="mini-chini-marron-frente"
+                          data-nombre="Mini Chini Marrón"
+                          data-precio="28000"
+                          data-imagen="../assets/Mini Chini Marron Frente.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Mochilas -->
+        <section class="products-section">
+          <h2 class="category-title">Mochilas</h2>
+          <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Mochila Jackie Amarilla.jpg" class="card-img-top product-image" alt="Mochila Jackie Amarilla">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Mochila Jackie Amarilla</h5>
+                  <p class="card-text">Mochila deportiva en amarillo, perfecta para el día a día.</p>
+                  <p class="price">$38.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="mochila-jackie-amarilla"
+                          data-nombre="Mochila Jackie Amarilla"
+                          data-precio="38000"
+                          data-imagen="../assets/Mochila Jackie Amarilla.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Monederos -->
+        <section class="products-section">
+          <h2 class="category-title">Monederos</h2>
+          <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Monedero Bordo.jpg" class="card-img-top product-image" alt="Monedero Bordo">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Monedero Bordo</h5>
+                  <p class="card-text">Monedero elegante en bordo, perfecto para organizar tus tarjetas.</p>
+                  <p class="price">$18.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="monedero-bordo"
+                          data-nombre="Monedero Bordo"
+                          data-precio="18000"
+                          data-imagen="../assets/Monedero Bordo.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Monedero Marron.jpg" class="card-img-top product-image" alt="Monedero Marron">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Monedero Marrón</h5>
+                  <p class="card-text">Monedero clásico en marrón, versátil y elegante.</p>
+                  <p class="price">$18.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="monedero-marron"
+                          data-nombre="Monedero Marrón"
+                          data-precio="18000"
+                          data-imagen="../assets/Monedero Marron.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Otros Bolsos -->
+        <section class="products-section">
+          <h2 class="category-title">Otros Bolsos</h2>
+          <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Paris Dorada.jpg" class="card-img-top product-image" alt="Paris Dorada">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Paris Dorada</h5>
+                  <p class="card-text">Bolso elegante en dorado, perfecto para ocasiones especiales.</p>
+                  <p class="price">$55.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="paris-dorada"
+                          data-nombre="Paris Dorada"
+                          data-precio="55000"
+                          data-imagen="../assets/Paris Dorada.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Riñonera 3 cierres Marron Claro.jpg" class="card-img-top product-image" alt="Riñonera 3 cierres Marron Claro">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Riñonera 3 Cierres Marrón Claro</h5>
+                  <p class="card-text">Riñonera funcional con múltiples compartimentos.</p>
+                  <p class="price">$25.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="rinonera-marron-claro"
+                          data-nombre="Riñonera 3 Cierres Marrón Claro"
+                          data-precio="25000"
+                          data-imagen="../assets/Riñonera 3 cierres Marron Claro.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Riñonera 3 cierres Marron Oscuro.jpg" class="card-img-top product-image" alt="Riñonera 3 cierres Marron Oscuro">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Riñonera 3 Cierres Marrón Oscuro</h5>
+                  <p class="card-text">Riñonera funcional en marrón oscuro, perfecta para el deporte.</p>
+                  <p class="price">$25.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="rinonera-marron-oscuro"
+                          data-nombre="Riñonera 3 Cierres Marrón Oscuro"
+                          data-precio="25000"
+                          data-imagen="../assets/Riñonera 3 cierres Marron Oscuro.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Roma Marron.jpg" class="card-img-top product-image" alt="Roma Marron">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Roma Marrón</h5>
+                  <p class="card-text">Bolso elegante inspirado en el estilo italiano.</p>
+                  <p class="price">$52.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="roma-marron"
+                          data-nombre="Roma Marrón"
+                          data-precio="52000"
+                          data-imagen="../assets/Roma Marron.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <footer class="py-4 mt-5" style="background-color: var(--color-primary); color: var(--color-secondary);">
+      <div class="container text-center">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400;">
+          Powered by:
+          <a
+            class="text-decoration-none"
+            href="https://www.byurodev.site"
+            target="_blank"
+            style="color: var(--color-secondary);"
+            >byurodev.site</a
+          >
+        </p>
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 600;">&copy;VRBAGS - Todos los derechos reservados</p>
+      </div>
+    </footer>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
+    <script src="../js/carrito.js"></script>
+  </body>
+</html>
