@@ -147,6 +147,26 @@
   --color-warning: #ffc107;
   --color-info: #17a2b8;
 }
+
+/* Familias alias solicitadas */
+@font-face {
+  font-family: 'montserrat2';
+  src: url("../assets/fonts/Montserrat-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'montserrat3';
+  src: url("../assets/fonts/Montserrat-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/* Tipografías globales por elemento */
+h1 { font-family: 'Montserrat', sans-serif; }
+h2, h3, h4, h5, h6 { font-family: 'montserrat2', 'Montserrat', sans-serif; }
+p, li, small, label, input, textarea, button { font-family: 'montserrat3', 'Montserrat', sans-serif; }
 .u-envios {
   display: flex;
   justify-content: center;

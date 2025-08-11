@@ -17,6 +17,10 @@
     <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
   </head>
   <body id="top">
+    <style>
+      html, body { overflow-x: hidden !important; }
+      .container, .container-fluid, .navbar, footer { overflow-x: hidden; }
+    </style>
     <a href="#top" class="scroll-up-btn">↑</a>
     <header>
       <article class="u-envios">
@@ -52,35 +56,65 @@
 </nav>
     </header>
     <main>
-      <section class="logo">
-        <img src="../assets/BYURO2.png" alt="byuroLogo">
+      <style>
+        .contact-hero { background:#000; color:#fff; padding:90px 0 60px; text-align:center; }
+        .contact-hero h1 { font-weight:800; letter-spacing:2px; }
+        .contact-card { background:#fff; border:1px solid #eee; border-radius:20px; padding:24px; }
+        .form-control, .form-select, textarea { border-radius:10px !important; }
+        .btn-black { background:#000; color:#fff; border:none; padding:12px 20px; border-radius:30px; }
+        .btn-black:hover { background:#111; }
+        .mono { filter:grayscale(100%); }
+        .link-plain { color:#000 !important; text-decoration:none !important; }
+        .link-plain:hover { color:#000 !important; text-decoration:none !important; }
+      </style>
+      <!-- Logo superior unificado -->
+      <section class="py-5 text-center">
+        <img src="../assets/VR BAGS.png" alt="VRBAGS" style="width:280px; max-width:85vw; height:auto;" class="mono"/>
       </section>
-      <section class="contacto">
-        <article class="form-wrapper" data-aos="fade-up">
-            <form class="form-container" action="https://formsubmit.co/contact.byuro@gmail.com" method="POST">
-              <h2 class="h2">CONTACTO</h2>
-              <label for="nombre">Nombre</label>
-              <input type="text" id="nombre" name="nombre" required>
-          
-              <label for="email">Email</label>
-              <input type="email" id="email" name="email" required>
-          
-              <label for="mensaje">Mensaje</label>
-              <textarea id="mensaje" name="mensaje" required></textarea>
-          
-              <button class="send" type="submit">Enviar</button>
-              <p class="contactame">¡Contactame para más info!</p>
+      <section class="contact-hero">
+        <h1 class="mt-1">Contacto</h1>
+        <p class="text-light">Escribinos y coordinamos tu compra por WhatsApp o email.</p>
+      </section>
 
-              <input type="hidden" name="_next" value="https://urielarey.github.io/BYuro-indumentaria/">
-              <input type="hidden" name="_captcha" value="false">
-            </form>
-          </section>
-    </main>
-    <footer>
-      <section class="publi">
-        <p>Powered by: <a class="sin-decoracion" href="https://www.byurodev.site" target="_blank">byurodev.site</a></p>
-        <p>&copy;BYuro - Todos los derechos reservados</p>
+      <section class="container my-5">
+        <div class="row g-4 align-items-stretch">
+          <div class="col-12 col-lg-6">
+            <div class="contact-card h-100">
+              <h5 class="fw-bold mb-3">Formulario</h5>
+              <form action="https://formsubmit.co/contact.byuro@gmail.com" method="POST">
+                <div class="mb-3">
+                  <label class="form-label">Nombre y apellido</label>
+                  <input class="form-control" type="text" name="nombre" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Email</label>
+                  <input class="form-control" type="email" name="email" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Mensaje</label>
+                  <textarea class="form-control" name="mensaje" rows="4" required></textarea>
+                </div>
+                <input type="hidden" name="_captcha" value="false">
+                <button class="btn-black" type="submit">Enviar</button>
+              </form>
+            </div>
+          </div>
+          <div class="col-12 col-lg-6">
+            <div class="contact-card h-100">
+              <h5 class="fw-bold mb-3">También podés</h5>
+              <p class="mb-2">WhatsApp: <a class="link-plain" href="https://wa.me/5491168666761" target="_blank">+54 9 11 6866 6761</a></p>
+              <p class="mb-2">Email: <a class="link-plain" href="mailto:soporte@vrbags.com">soporte@vrbags.com</a></p>
+              <img src="../assets/VR BAGS.png" alt="VRBAGS" class="w-100 rounded-4 mono mt-3" style="object-fit:contain; height:280px; background:#f8f9fa;"/>
+            </div>
+          </div>
+        </div>
       </section>
+    </main>
+    <footer class="py-4 mt-5" style="background-color: var(--color-primary); color: var(--color-secondary);">
+      <div class="container text-center">
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 400;">Powered by: <a class="text-decoration-none" href="https://www.byurodev.site" target="_blank" style="color: var(--color-secondary);">byurodev.site</a></p>
+        <p style="font-family: 'Montserrat', sans-serif; font-weight: 600;">&copy;VRBAGS - Todos los derechos reservados</p>
+      </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
