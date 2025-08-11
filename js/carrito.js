@@ -2,6 +2,7 @@
 class Carrito {
   constructor() {
     this.items = JSON.parse(localStorage.getItem('carrito')) || [];
+    this.checkoutModalInitialized = false;
     this.init();
   }
 
@@ -131,6 +132,7 @@ class Carrito {
   renderizarCarrito() {
     const contenedor = document.getElementById('carrito-container');
     const totalEl = document.getElementById('total');
+    const subtotalEl = document.getElementById('subtotal');
     
     if (!contenedor) return;
 
@@ -145,6 +147,7 @@ class Carrito {
         </div>
       `;
       if (totalEl) totalEl.textContent = '$0';
+      if (subtotalEl) subtotalEl.textContent = '$0';
       return;
     }
 
@@ -157,26 +160,26 @@ class Carrito {
       const div = document.createElement('div');
       div.classList.add('carrito-item', 'border-bottom', 'pb-3', 'mb-3', 'animate__animated', 'animate__fadeIn');
       div.innerHTML = `
-        <div class="row align-items-center">
-          <div class="col-2">
+        <div class="row g-2 align-items-center">
+          <div class="col-3 col-md-2">
             <img src="${producto.imagen}" alt="${producto.nombre}" class="img-fluid rounded" style="max-height: 60px; object-fit: cover;">
           </div>
-          <div class="col-6">
+          <div class="col-9 col-md-6">
             <h6 class="mb-1">${producto.nombre}</h6>
             <p class="text-muted mb-0">$${producto.precio.toLocaleString()}</p>
           </div>
-          <div class="col-2">
-            <div class="btn-group btn-group-sm" role="group">
+          <div class="col-7 col-md-2 mt-2 mt-md-0">
+            <div class="btn-group btn-group-sm w-100" role="group">
               <button type="button" class="btn btn-outline-secondary update-quantity" data-index="${index}" data-action="decrease" title="Disminuir cantidad">
                 <i class="bi bi-dash"></i>
               </button>
-              <span class="btn btn-outline-secondary disabled">${producto.cantidad}</span>
+              <span class="btn btn-outline-secondary disabled flex-grow-1">${producto.cantidad}</span>
               <button type="button" class="btn btn-outline-secondary update-quantity" data-index="${index}" data-action="increase" title="Aumentar cantidad">
                 <i class="bi bi-plus"></i>
               </button>
             </div>
           </div>
-          <div class="col-2 text-end">
+          <div class="col-5 col-md-2 text-end mt-2 mt-md-0">
             <p class="mb-1 fw-bold">$${subtotal.toLocaleString()}</p>
             <button class="btn btn-sm btn-outline-danger remove-item" data-index="${index}" title="Eliminar producto">
               <i class="bi bi-trash"></i>
@@ -187,6 +190,9 @@ class Carrito {
       contenedor.appendChild(div);
     });
 
+    if (subtotalEl) {
+      subtotalEl.textContent = `$${total.toLocaleString()}`;
+    }
     if (totalEl) {
       totalEl.textContent = `$${total.toLocaleString()}`;
       totalEl.classList.add('animate__animated', 'animate__pulse');
@@ -216,6 +222,155 @@ class Carrito {
         `;
       }
     }
+  }
+
+  ensureCheckoutModal() {
+    if (this.checkoutModalInitialized) return;
+
+    // Crear e inyectar modal si no existe
+    if (!document.getElementById('checkoutModal')) {
+      const modalHtml = `
+      <div class="modal fade" id="checkoutModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <form id="checkout-form">
+              <div class="modal-header">
+                <h5 class="modal-title">Finalizar compra</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <div class="mb-3">
+                  <label class="form-label">Nombre y apellido</label>
+                  <input type="text" class="form-control" id="nombreCompleto" placeholder="Tu nombre" required />
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Método de pago</label>
+                  <select id="metodoPago" class="form-select" required>
+                    <option value="Transferencia" selected>Transferencia</option>
+                    <option value="Mercado Pago">Mercado Pago</option>
+                    <option value="Efectivo">Efectivo</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Envío o retiro</label>
+                  <select id="tipoEnvio" class="form-select" required>
+                    <option value="Envío a domicilio" selected>Envío a domicilio</option>
+                    <option value="Retiro en sucursal">Retiro en sucursal</option>
+                  </select>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Dirección / Detalle</label>
+                  <textarea id="detalleEnvio" class="form-control" rows="2" placeholder="Dirección, localidad o punto de retiro"></textarea>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Notas (opcional)</label>
+                  <textarea id="notas" class="form-control" rows="2" placeholder="Instrucciones o comentarios"></textarea>
+                </div>
+                <div class="alert alert-light border">
+                  <div class="d-flex justify-content-between">
+                    <span>Productos</span>
+                    <strong id="resumenCantidad">0</strong>
+                  </div>
+                  <div class="d-flex justify-content-between">
+                    <span>Total</span>
+                    <strong id="resumenTotal">$0</strong>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success"><i class="bi bi-whatsapp"></i> Enviar por WhatsApp</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>`;
+
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = modalHtml;
+      document.body.appendChild(wrapper);
+    }
+
+    // Listener submit (solo una vez)
+    const form = document.getElementById('checkout-form');
+    if (form && !form.dataset.bound) {
+      form.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        this.enviarWhatsappDesdeFormulario();
+      });
+      form.dataset.bound = 'true';
+    }
+
+    this.checkoutModalInitialized = true;
+  }
+
+  abrirCheckoutModal() {
+    // Actualizar resumen
+    const resumenCantidad = document.getElementById('resumenCantidad');
+    const resumenTotal = document.getElementById('resumenTotal');
+    if (resumenCantidad) resumenCantidad.textContent = `${this.obtenerCantidadTotal()} ítems`;
+    if (resumenTotal) resumenTotal.textContent = `$${this.obtenerTotal().toLocaleString('es-AR')}`;
+
+    // Mostrar modal
+    const modalEl = document.getElementById('checkoutModal');
+    if (modalEl) {
+      const Bootstrap = window.bootstrap;
+      if (Bootstrap && Bootstrap.Modal) {
+        const modal = Bootstrap.Modal.getOrCreateInstance(modalEl);
+        modal.show();
+      } else {
+        // Fallback simple
+        modalEl.style.display = 'block';
+        modalEl.classList.add('show');
+      }
+    }
+  }
+
+  enviarWhatsappDesdeFormulario() {
+    const nombreCliente = document.getElementById('nombreCompleto')?.value?.trim() || 'Cliente';
+    const metodoPago = document.getElementById('metodoPago')?.value || 'Transferencia';
+    const tipoEnvio = document.getElementById('tipoEnvio')?.value || 'Envío a domicilio';
+    const detalleEnvio = document.getElementById('detalleEnvio')?.value?.trim() || 'A coordinar';
+    const notas = document.getElementById('notas')?.value?.trim();
+
+    const lineas = [];
+    lineas.push(`Hola, soy ${nombreCliente}. Quiero realizar una compra:`);
+    lineas.push('');
+    this.items.forEach((item) => {
+      const subtotal = item.precio * item.cantidad;
+      lineas.push(`- ${item.nombre} x${item.cantidad} = $${subtotal.toLocaleString('es-AR')}`);
+    });
+    lineas.push('');
+    lineas.push(`Total: $${this.obtenerTotal().toLocaleString('es-AR')}`);
+    lineas.push(`Método de pago: ${metodoPago}`);
+    lineas.push(`${tipoEnvio}: ${detalleEnvio}`);
+    if (notas) {
+      lineas.push('');
+      lineas.push(`Notas: ${notas}`);
+    }
+    lineas.push('');
+    lineas.push('¿Me confirmás disponibilidad y coordinamos el envío? ¡Gracias!');
+
+    const mensaje = lineas.join('\n');
+    const numero = '5491168666761';
+    const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+
+    // Cerrar modal (si existe)
+    const modalEl = document.getElementById('checkoutModal');
+    if (modalEl) {
+      const Bootstrap = window.bootstrap;
+      if (Bootstrap && Bootstrap.Modal) {
+        const modal = Bootstrap.Modal.getOrCreateInstance(modalEl);
+        modal.hide();
+      } else {
+        modalEl.classList.remove('show');
+        modalEl.style.display = 'none';
+      }
+    }
+
+    // Abrir WhatsApp
+    window.open(url, '_blank');
+    this.mostrarNotificacion('Abriendo WhatsApp para finalizar la compra...', 'info');
   }
 
   mostrarNotificacion(mensaje, tipo = 'success') {
@@ -268,75 +423,9 @@ class Carrito {
       return;
     }
 
-    try {
-      // Mostrar loading
-      const checkoutBtn = document.querySelector('.checkout-btn');
-      if (checkoutBtn) {
-        checkoutBtn.disabled = true;
-        checkoutBtn.innerHTML = '<i class="bi bi-hourglass-split"></i> Procesando...';
-      }
-
-      // Crear orden para Mercado Pago
-      const orden = {
-        items: this.items.map(item => ({
-          title: item.nombre,
-          unit_price: item.precio,
-          quantity: item.cantidad,
-          picture_url: item.imagen,
-          description: item.nombre
-        })),
-        total: this.obtenerTotal()
-      };
-
-      console.log('📦 Enviando orden:', orden);
-
-      // Enviar al backend
-      const response = await fetch('/api/crear-orden', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(orden)
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message || 'Error al procesar la orden');
-      }
-
-      const data = await response.json();
-      
-      if (data.success && data.init_point) {
-        this.mostrarNotificacion('Redirigiendo a Mercado Pago...', 'info');
-        
-        // Limpiar carrito antes de redirigir
-        this.items = [];
-        this.guardarCarrito();
-        this.actualizarContadorCarrito();
-        this.renderizarCarrito();
-        
-        // Redirigir a Mercado Pago
-        setTimeout(() => {
-          window.location.href = data.init_point;
-        }, 1500);
-      } else {
-        throw new Error('No se recibió el enlace de pago');
-      }
-
-    } catch (error) {
-      console.error('❌ Error al procesar la compra:', error);
-      
-      // Restaurar botón de checkout
-      if (checkoutBtn) {
-        checkoutBtn.disabled = false;
-        this.actualizarBotonCheckout();
-      }
-      
-      this.mostrarNotificacion(
-        `Error al procesar la compra: ${error.message}`, 
-        'danger'
-      );
-    }
+    // Asegurar modal y abrirlo
+    this.ensureCheckoutModal();
+    this.abrirCheckoutModal();
   }
 
   obtenerTotal() {

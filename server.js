@@ -5,8 +5,8 @@ const morgan = require('morgan');
 const path = require('path');
 require('dotenv').config();
 
-// Configuración de Mercado Pago
-const mercadopago = require('mercadopago');
+// Configuración de Mercado Pago (SDK v2)
+const { MercadoPagoConfig } = require('mercadopago');
 
 // Validar que exista el token de Mercado Pago
 const MP_ACCESS_TOKEN = process.env.MERCADOPAGO_ACCESS_TOKEN;
@@ -16,12 +16,9 @@ if (!MP_ACCESS_TOKEN) {
   process.exit(1);
 }
 
-// Configurar Mercado Pago
-mercadopago.configure({
-  access_token: MP_ACCESS_TOKEN
-});
-
-console.log('✅ Mercado Pago configurado correctamente');
+// Configurar cliente de Mercado Pago
+const mpClient = new MercadoPagoConfig({ accessToken: MP_ACCESS_TOKEN });
+console.log('✅ Mercado Pago configurado correctamente (SDK v2)');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -54,6 +51,9 @@ app.use((req, res, next) => {
   console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
   next();
 });
+
+// Exponer el cliente de MP al router
+app.set('mpClient', mpClient);
 
 // Rutas de la API
 app.use('/api', require('./routes/api'));

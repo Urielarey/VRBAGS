@@ -53,7 +53,7 @@
       }
       .add-to-cart-btn {
         width: 100%;
-        margin-top: 10px;
+        margin-top: auto;
         background-color: var(--color-primary);
         border-color: var(--color-primary);
         color: var(--color-secondary);
@@ -100,6 +100,18 @@
         font-weight: 400;
         color: var(--color-text-light);
       }
+
+      /* Responsive: celulares y tablets */
+      @media (max-width: 575.98px) {
+        .product-image { height: 200px; }
+        .category-title { font-size: 1.4rem; margin-bottom: 20px; }
+        .add-to-cart-btn { font-size: 0.95rem; padding: 0.6rem 0.75rem; }
+      }
+
+      @media (min-width: 576px) and (max-width: 991.98px) {
+        .product-image { height: 240px; }
+        .add-to-cart-btn { font-size: 1rem; }
+      }
     </style>
   </head>
   <body id="top">
@@ -108,9 +120,9 @@
       <article class="u-envios">
         <h6>Envío a todo el país 🚚</h6>
       </article>
-      <nav class="navbar navbar-expand-lg fixed-top" style="background-color: var(--color-secondary); border-bottom: 2px solid var(--color-primary);">
+      <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div class="container-fluid">
-          <a class="navbar-brand" href="../index.html" style="color: var(--color-primary); font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.5rem;">VRBAGS</a>
+          <a class="navbar-brand" href="../index.html">VRBAGS</a>
           <a
             class="navbar-brand ms-auto d-lg-none position-relative"
             href="carrito.html"
@@ -139,18 +151,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="../index.html" style="color: var(--color-text); font-family: 'Montserrat', sans-serif; font-weight: 500;">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link active" href="tienda.html" style="color: var(--color-primary); font-family: 'Montserrat', sans-serif; font-weight: 700;">Tienda</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contacto.html" style="color: var(--color-text); font-family: 'Montserrat', sans-serif; font-weight: 500;">Contacto</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="ayuda.html" style="color: var(--color-text); font-family: 'Montserrat', sans-serif; font-weight: 500;">Ayuda</a>
-              </li>
+              <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+              <li class="nav-item"><a class="nav-link active" href="tienda.html">Tienda</a></li>
+              <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+              <li class="nav-item"><a class="nav-link" href="ayuda.html">Ayuda</a></li>
             </ul>
             <a
               class="navbar-brand d-none d-lg-block position-relative"
@@ -177,8 +181,8 @@
     <main style="margin-top: 120px;">
       <div class="container">
         <section class="text-center mb-5">
-          <h1 class="display-4 fw-bold text-primary">VRBAGS</h1>
-          <p class="lead">Descubrí nuestra colección de bolsos y accesorios</p>
+          <h1 class="display-4 fw-bold h2">TIENDA</h1>
+          <p class="lead">Descubrí nuestra colección de bolsos y carteras</p>
         </section>
 
         <!-- Bolsos Miri -->
@@ -469,32 +473,14 @@
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
               <div class="card product-card h-100">
-                <img src="../assets/Mini Chini Marron Costado.jpg" class="card-img-top product-image" alt="Mini Chini Marron Costado">
+                <img src="../assets/Mini Chini Marron Frente.jpg" class="card-img-top product-image" alt="Mini Chini">
                 <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">Mini Chini Marrón - Vista Costado</h5>
-                  <p class="card-text">Mini bolso elegante en marrón, perfecto para salidas casuales.</p>
-                  <p class="price">$28.000</p>
-                  <button class="btn btn-primary add-to-cart-btn" 
-                          data-id="mini-chini-marron"
-                          data-nombre="Mini Chini Marrón"
-                          data-precio="28000"
-                          data-imagen="../assets/Mini Chini Marron Costado.jpg">
-                    Agregar al Carrito
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card product-card h-100">
-                <img src="../assets/Mini Chini Marron Frente.jpg" class="card-img-top product-image" alt="Mini Chini Marron Frente">
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">Mini Chini Marrón - Vista Frente</h5>
+                  <h5 class="card-title">Mini Chini</h5>
                   <p class="card-text">Mini bolso elegante en marrón, diseño compacto y funcional.</p>
                   <p class="price">$28.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
-                          data-id="mini-chini-marron-frente"
-                          data-nombre="Mini Chini Marrón"
+                          data-id="mini-chini"
+                          data-nombre="Mini Chini"
                           data-precio="28000"
                           data-imagen="../assets/Mini Chini Marron Frente.jpg">
                     Agregar al Carrito
@@ -571,9 +557,50 @@
           </div>
         </section>
 
-        <!-- Otros Bolsos -->
+        <!-- Riñoneras -->
         <section class="products-section">
-          <h2 class="category-title">Otros Bolsos</h2>
+          <h2 class="category-title">Riñoneras</h2>
+          <div class="row g-4">
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Riñonera 3 cierres Marron Claro.jpg" class="card-img-top product-image" alt="Riñonera 3 cierres Marrón Claro">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Riñonera 3 Cierres Marrón Claro</h5>
+                  <p class="card-text">Riñonera funcional con múltiples compartimentos.</p>
+                  <p class="price">$25.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="rinonera-marron-claro"
+                          data-nombre="Riñonera 3 Cierres Marrón Claro"
+                          data-precio="25000"
+                          data-imagen="../assets/Riñonera 3 cierres Marron Claro.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6 col-lg-4">
+              <div class="card product-card h-100">
+                <img src="../assets/Riñonera 3 cierres Marron Oscuro.jpg" class="card-img-top product-image" alt="Riñonera 3 cierres Marrón Oscuro">
+                <div class="card-body d-flex flex-column">
+                  <h5 class="card-title">Riñonera 3 Cierres Marrón Oscuro</h5>
+                  <p class="card-text">Riñonera funcional en marrón oscuro, perfecta para el deporte.</p>
+                  <p class="price">$25.000</p>
+                  <button class="btn btn-primary add-to-cart-btn" 
+                          data-id="rinonera-marron-oscuro"
+                          data-nombre="Riñonera 3 Cierres Marrón Oscuro"
+                          data-precio="25000"
+                          data-imagen="../assets/Riñonera 3 cierres Marron Oscuro.jpg">
+                    Agregar al Carrito
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Paris -->
+        <section class="products-section">
+          <h2 class="category-title">Paris</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
               <div class="card product-card h-100">
@@ -592,46 +619,16 @@
                 </div>
               </div>
             </div>
-            
+          </div>
+        </section>
+
+        <!-- Roma -->
+        <section class="products-section">
+          <h2 class="category-title">Roma</h2>
+          <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
               <div class="card product-card h-100">
-                <img src="../assets/Riñonera 3 cierres Marron Claro.jpg" class="card-img-top product-image" alt="Riñonera 3 cierres Marron Claro">
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">Riñonera 3 Cierres Marrón Claro</h5>
-                  <p class="card-text">Riñonera funcional con múltiples compartimentos.</p>
-                  <p class="price">$25.000</p>
-                  <button class="btn btn-primary add-to-cart-btn" 
-                          data-id="rinonera-marron-claro"
-                          data-nombre="Riñonera 3 Cierres Marrón Claro"
-                          data-precio="25000"
-                          data-imagen="../assets/Riñonera 3 cierres Marron Claro.jpg">
-                    Agregar al Carrito
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card product-card h-100">
-                <img src="../assets/Riñonera 3 cierres Marron Oscuro.jpg" class="card-img-top product-image" alt="Riñonera 3 cierres Marron Oscuro">
-                <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">Riñonera 3 Cierres Marrón Oscuro</h5>
-                  <p class="card-text">Riñonera funcional en marrón oscuro, perfecta para el deporte.</p>
-                  <p class="price">$25.000</p>
-                  <button class="btn btn-primary add-to-cart-btn" 
-                          data-id="rinonera-marron-oscuro"
-                          data-nombre="Riñonera 3 Cierres Marrón Oscuro"
-                          data-precio="25000"
-                          data-imagen="../assets/Riñonera 3 cierres Marron Oscuro.jpg">
-                    Agregar al Carrito
-                  </button>
-                </div>
-              </div>
-            </div>
-            
-            <div class="col-12 col-md-6 col-lg-4">
-              <div class="card product-card h-100">
-                <img src="../assets/Roma Marron.jpg" class="card-img-top product-image" alt="Roma Marron">
+                <img src="../assets/Roma Marron.jpg" class="card-img-top product-image" alt="Roma Marrón">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Roma Marrón</h5>
                   <p class="card-text">Bolso elegante inspirado en el estilo italiano.</p>

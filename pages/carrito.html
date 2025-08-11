@@ -68,6 +68,22 @@
         transform: none;
         box-shadow: none;
       }
+
+      /* Responsive ajustes */
+      @media (max-width: 575.98px) {
+        main { margin-top: 100px !important; }
+        .card-header h5 { font-size: 1rem; }
+        .checkout-btn { padding: 12px 16px; font-size: 1rem; }
+        .carrito-item .row > div { padding-top: 6px; padding-bottom: 6px; }
+        #carrito-container img { max-height: 50px !important; }
+        .btn-group .btn { padding: 0.25rem 0.5rem; }
+        h1.display-5 { font-size: 1.6rem; }
+      }
+
+      @media (min-width: 576px) and (max-width: 991.98px) {
+        .checkout-btn { font-size: 1rem; }
+        #carrito-container img { max-height: 60px; }
+      }
     </style>
   </head>
   <body id="top">
@@ -76,7 +92,7 @@
       <article class="u-envios">
         <h6>Envío a todo el país 🚚</h6>
       </article>
-      <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
+       <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
         <div class="container-fluid">
           <a class="navbar-brand" href="../index.html">VRBAGS</a>
           <a
@@ -107,18 +123,10 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav me-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="../index.html">Inicio</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="tienda.html">Tienda</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="contacto.html">Contacto</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="ayuda.html">Ayuda</a>
-              </li>
+              <li class="nav-item"><a class="nav-link" href="../index.html">Inicio</a></li>
+              <li class="nav-item"><a class="nav-link" href="tienda.html">Tienda</a></li>
+              <li class="nav-item"><a class="nav-link" href="contacto.html">Contacto</a></li>
+              <li class="nav-item"><a class="nav-link" href="ayuda.html">Ayuda</a></li>
             </ul>
             <a
               class="navbar-brand d-none d-lg-block position-relative"
@@ -143,23 +151,10 @@
     </header>
     
     <main style="margin-top: 120px;">
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="../index.html">Inicio</a></li>
-                <li class="breadcrumb-item"><a href="tienda.html">Tienda</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Carrito</li>
-              </ol>
-            </nav>
-          </div>
-        </div>
-
         <div class="row">
           <div class="col-12">
             <h1 class="display-5 fw-bold text-center mb-5">
-              <i class="bi bi-cart3 text-primary"></i> Tu Carrito
+              <i class="bi bi-cart3 h2 "></i> Tu Carrito
             </h1>
           </div>
         </div>
@@ -218,54 +213,13 @@
                   </a>
                 </div>
 
-                <div class="mt-4 p-3 bg-light rounded">
-                  <h6 class="mb-2">
-                    <i class="bi bi-shield-check text-success"></i> Pago Seguro
-                  </h6>
-                  <p class="small mb-0">
-                    Tus datos están protegidos. Utilizamos Mercado Pago para procesar los pagos de forma segura.
-                  </p>
-                </div>
+                <!-- Nota de seguridad removida: no usamos Mercado Pago -->
               </div>
             </div>
           </div>
         </div>
 
-        <!-- Información adicional -->
-        <div class="row mt-5">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">
-                  <i class="bi bi-info-circle text-primary"></i> Información importante
-                </h5>
-                <div class="row">
-                  <div class="col-md-4">
-                    <div class="text-center">
-                      <i class="bi bi-truck text-primary fs-1"></i>
-                      <h6 class="mt-2">Envío Gratis</h6>
-                      <p class="small text-muted">Envío a todo el país sin costo adicional</p>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="text-center">
-                      <i class="bi bi-arrow-clockwise text-primary fs-1"></i>
-                      <h6 class="mt-2">Devolución Gratuita</h6>
-                      <p class="small text-muted">30 días para cambios o devoluciones</p>
-                    </div>
-                  </div>
-                  <div class="col-md-4">
-                    <div class="text-center">
-                      <i class="bi bi-shield-check text-primary fs-1"></i>
-                      <h6 class="mt-2">Pago Seguro</h6>
-                      <p class="small text-muted">Mercado Pago garantiza la seguridad</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <!-- Información adicional removida por pedido -->
       </div>
     </main>
 

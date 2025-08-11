@@ -1,5 +1,5 @@
 const express = require('express');
-const mercadopago = require('mercadopago');
+const { Preference, Payment } = require('mercadopago');
 const router = express.Router();
 
 // Middleware para validar datos de entrada
@@ -45,11 +45,13 @@ const validarOrden = (req, res, next) => {
 router.post('/crear-orden', validarOrden, async (req, res) => {
   try {
     const { items, total, customer } = req.body;
+    const mpClient = req.app.get('mpClient');
+    const preferenceClient = new Preference(mpClient);
     
     console.log('📦 Creando orden:', { items: items.length, total, customer });
 
     // Crear preferencia de Mercado Pago
-    const preference = {
+    const preferenceBody = {
       items: items.map(item => ({
         title: item.title,
         unit_price: Number(item.unit_price),
@@ -80,24 +82,24 @@ router.post('/crear-orden', validarOrden, async (req, res) => {
 
     // Agregar información del cliente si está disponible
     if (customer) {
-      preference.payer = {
+      preferenceBody.payer = {
         name: customer.name,
         email: customer.email,
         phone: customer.phone
       };
     }
 
-    console.log('🔧 Creando preferencia en Mercado Pago...');
-    const response = await mercadopago.preferences.create(preference);
+    console.log('🔧 Creando preferencia en Mercado Pago (SDK v2)...');
+    const response = await preferenceClient.create({ body: preferenceBody });
     
-    console.log('✅ Preferencia creada:', response.body.id);
+    console.log('✅ Preferencia creada:', response.id || response.body?.id);
     
     res.json({
       success: true,
-      id: response.body.id,
-      init_point: response.body.init_point,
-      sandbox_init_point: response.body.sandbox_init_point,
-      external_reference: preference.external_reference,
+      id: response.id || response.body?.id,
+      init_point: response.init_point || response.body?.init_point,
+      sandbox_init_point: response.sandbox_init_point || response.body?.sandbox_init_point,
+      external_reference: preferenceBody.external_reference,
       message: 'Orden creada exitosamente'
     });
 
@@ -121,35 +123,36 @@ router.post('/crear-orden', validarOrden, async (req, res) => {
 });
 
 // Webhook para notificaciones de Mercado Pago
-router.post('/webhook', async (req, res) => {
+router.all('/webhook', async (req, res) => {
   try {
-    const { type, data } = req.body;
-    
-    console.log('🔔 Webhook recibido:', { type, data });
-    
-    if (type === 'payment') {
-      const paymentId = data.id;
-      
+    const mpClient = req.app.get('mpClient');
+    const paymentClient = new Payment(mpClient);
+
+    // Mercado Pago puede enviar GET o POST
+    const type = req.body?.type || req.query?.type || req.query?.topic;
+    const paymentId = req.body?.data?.id || req.query?.id || req.query?.['data.id'];
+
+    console.log('🔔 Webhook recibido:', { type, paymentId });
+
+    if ((type === 'payment' || type === 'merchant_order') && paymentId) {
       // Obtener información del pago
-      const payment = await mercadopago.payment.get(paymentId);
-      
+      const payment = await paymentClient.get({ id: paymentId });
+
+      const paymentBody = payment.body || payment; // SDK puede devolver .body
       const paymentInfo = {
-        id: payment.body.id,
-        status: payment.body.status,
-        status_detail: payment.body.status_detail,
-        amount: payment.body.transaction_amount,
-        external_reference: payment.body.external_reference,
-        payment_method: payment.body.payment_method?.type,
-        installments: payment.body.installments,
-        date_created: payment.body.date_created,
-        date_approved: payment.body.date_approved
+        id: paymentBody.id,
+        status: paymentBody.status,
+        status_detail: paymentBody.status_detail,
+        amount: paymentBody.transaction_amount,
+        external_reference: paymentBody.external_reference,
+        payment_method: paymentBody.payment_method?.type || paymentBody.payment_type_id,
+        installments: paymentBody.installments,
+        date_created: paymentBody.date_created,
+        date_approved: paymentBody.date_approved
       };
-      
+
       console.log('💳 Información del pago:', paymentInfo);
 
-      // Aquí puedes agregar lógica para actualizar tu base de datos
-      // Por ejemplo, marcar la orden como pagada, enviar email de confirmación, etc.
-      
       // Simular procesamiento de la orden
       await procesarOrdenPagada(paymentInfo);
     }
@@ -194,6 +197,8 @@ async function procesarOrdenPagada(paymentInfo) {
 router.get('/payment-status/:id', async (req, res) => {
   try {
     const paymentId = req.params.id;
+    const mpClient = req.app.get('mpClient');
+    const paymentClient = new Payment(mpClient);
     
     if (!paymentId) {
       return res.status(400).json({ 
@@ -204,18 +209,19 @@ router.get('/payment-status/:id', async (req, res) => {
     
     console.log('🔍 Consultando estado del pago:', paymentId);
     
-    const payment = await mercadopago.payment.get(paymentId);
-    
+    const payment = await paymentClient.get({ id: paymentId });
+    const paymentBody = payment.body || payment;
+
     const paymentStatus = {
-      id: payment.body.id,
-      status: payment.body.status,
-      status_detail: payment.body.status_detail,
-      amount: payment.body.transaction_amount,
-      external_reference: payment.body.external_reference,
-      payment_method: payment.body.payment_method?.type,
-      installments: payment.body.installments,
-      date_created: payment.body.date_created,
-      date_approved: payment.body.date_approved,
+      id: paymentBody.id,
+      status: paymentBody.status,
+      status_detail: paymentBody.status_detail,
+      amount: paymentBody.transaction_amount,
+      external_reference: paymentBody.external_reference,
+      payment_method: paymentBody.payment_method?.type || paymentBody.payment_type_id,
+      installments: paymentBody.installments,
+      date_created: paymentBody.date_created,
+      date_approved: paymentBody.date_approved,
       last_updated: new Date().toISOString()
     };
     
