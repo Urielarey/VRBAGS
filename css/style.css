@@ -748,4 +748,51 @@ a.sin-decoracion:hover {
   background-color: #191716;
 }
 
+.gallery-img {
+  height: 340px;
+  max-height: 420px;
+  object-fit: contain;
+  width: 100%;
+  border-radius: 16px;
+  background: #f8f9fa;
+  padding: 12px;
+}
+@media (max-width: 991.98px) {
+  .gallery-img {
+    height: 200px;
+    max-height: 240px;
+    padding: 8px;
+  }
+}
+
+@media (max-width: 991.98px) {
+  .gallery-item.hide-mobile {
+    display: none !important;
+  }
+}
+
+/* Alertas elegantes blanco y negro */
+.alert {
+  background: #fff !important;
+  color: #111 !important;
+  border: 1.5px solid #222 !important;
+  border-radius: 12px !important;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  box-shadow: 0 2px 16px 0 rgba(0,0,0,0.04);
+}
+.alert-success, .alert-info, .alert-warning, .alert-danger {
+  background: #111 !important;
+  color: #fff !important;
+  border: 1.5px solid #fff !important;
+}
+.alert-light {
+  background: #fff !important;
+  color: #111 !important;
+  border: 1.5px solid #222 !important;
+}
+.alert .btn-close {
+  filter: invert(1);
+}
+
 /*# sourceMappingURL=style.css.map */

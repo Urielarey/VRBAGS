@@ -195,6 +195,8 @@ class Carrito {
     }
     if (totalEl) {
       totalEl.textContent = `$${total.toLocaleString()}`;
+      totalEl.classList.remove('text-primary');
+      totalEl.classList.add('text-dark');
       totalEl.classList.add('animate__animated', 'animate__pulse');
       setTimeout(() => {
         totalEl.classList.remove('animate__animated', 'animate__pulse');
