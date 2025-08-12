@@ -13,32 +13,45 @@ class Carrito {
   }
 
   configurarEventos() {
-    // Eventos para botones de agregar al carrito
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('add-to-cart-btn')) {
-        this.agregarProducto(e.target);
+    // Delegación robusta de eventos en todo el documento
+    document.addEventListener('click', async (e) => {
+      // Agregar al carrito
+      const addBtn = e.target.closest('.add-to-cart-btn');
+      if (addBtn) {
+        this.agregarProducto(addBtn);
+        return;
       }
-    });
 
-    // Eventos para botones del carrito
-    document.addEventListener('click', (e) => {
-      if (e.target.classList.contains('remove-item')) {
-        const index = parseInt(e.target.dataset.index);
-        this.eliminarProducto(index);
+      // Eliminar item
+      const removeBtn = e.target.closest('.remove-item');
+      if (removeBtn) {
+        await this.solicitarEliminar(removeBtn);
+        return;
       }
-      
-      if (e.target.classList.contains('update-quantity')) {
-        const index = parseInt(e.target.dataset.index);
-        const action = e.target.dataset.action;
-        this.actualizarCantidad(index, action);
+
+      // Actualizar cantidad
+      const qtyBtn = e.target.closest('.update-quantity');
+      if (qtyBtn) {
+        const index = parseInt(qtyBtn.dataset.index);
+        const action = qtyBtn.dataset.action;
+        if (!Number.isNaN(index) && (action === 'increase' || action === 'decrease')) {
+          this.actualizarCantidad(index, action);
+        }
+        return;
       }
-      
-      if (e.target.classList.contains('vaciar-carrito')) {
-        this.vaciarCarrito();
+
+      // Vaciar carrito
+      const clearBtn = e.target.closest('.vaciar-carrito');
+      if (clearBtn) {
+        await this.solicitarVaciar();
+        return;
       }
-      
-      if (e.target.classList.contains('checkout-btn')) {
+
+      // Checkout
+      const checkoutBtn = e.target.closest('.checkout-btn');
+      if (checkoutBtn) {
         this.procesarCompra();
+        return;
       }
     });
   }
@@ -68,15 +81,109 @@ class Carrito {
     this.renderizarCarrito();
   }
 
-  eliminarProducto(index) {
-    if (confirm('¿Estás seguro de que querés eliminar este producto?')) {
-      const productoEliminado = this.items[index].nombre;
-      this.items.splice(index, 1);
-      this.guardarCarrito();
-      this.actualizarContadorCarrito();
-      this.renderizarCarrito();
-      this.mostrarNotificacion(`${productoEliminado} eliminado del carrito`, 'info');
+  // Modal de confirmación (blanco y negro)
+  ensureConfirmModal() {
+    if (document.getElementById('confirmModal')) return;
+
+    const modalHtml = `
+      <div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content bg-dark text-light border border-light rounded-4">
+            <div class="modal-header border-0">
+              <h5 class="modal-title">Confirmar acción</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <p id="confirmMessage" class="mb-0">¿Estás seguro?</p>
+            </div>
+            <div class="modal-footer border-0">
+              <button type="button" class="btn btn-outline-light" data-action="cancel">Cancelar</button>
+              <button type="button" class="btn btn-light text-dark" data-action="ok">Aceptar</button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = modalHtml;
+    document.body.appendChild(wrapper);
+  }
+
+  confirmar(mensaje) {
+    this.ensureConfirmModal();
+
+    const modalEl = document.getElementById('confirmModal');
+    const msgEl = document.getElementById('confirmMessage');
+    if (msgEl) msgEl.textContent = mensaje || '¿Confirmás esta acción?';
+
+    const Bootstrap = window.bootstrap;
+    const modal = Bootstrap && Bootstrap.Modal
+      ? Bootstrap.Modal.getOrCreateInstance(modalEl)
+      : null;
+
+    return new Promise((resolve) => {
+      const okBtn = modalEl.querySelector('[data-action="ok"]');
+      const cancelBtn = modalEl.querySelector('[data-action="cancel"]');
+
+      const cleanup = () => {
+        okBtn.removeEventListener('click', onOk);
+        cancelBtn.removeEventListener('click', onCancel);
+        modalEl.removeEventListener('hidden.bs.modal', onCancel);
+      };
+      const onOk = () => { cleanup(); modal && modal.hide(); resolve(true); };
+      const onCancel = () => { cleanup(); resolve(false); };
+
+      okBtn.addEventListener('click', onOk);
+      cancelBtn.addEventListener('click', onCancel);
+      modalEl.addEventListener('hidden.bs.modal', onCancel, { once: true });
+
+      if (modal) modal.show(); else { modalEl.style.display = 'block'; }
+    });
+  }
+
+  async solicitarEliminar(indexOrBtn) {
+    let indexNum = typeof indexOrBtn === 'number' ? indexOrBtn : NaN;
+    if (typeof indexOrBtn !== 'number') {
+      const btn = indexOrBtn;
+      const fromAttr = Number.parseInt(btn?.dataset?.index, 10);
+      if (!Number.isNaN(fromAttr)) indexNum = fromAttr;
+      else {
+        const container = btn?.closest('.carrito-item');
+        const fromContainer = Number.parseInt(container?.getAttribute('data-index'), 10);
+        if (!Number.isNaN(fromContainer)) indexNum = fromContainer;
+      }
     }
+
+    if (typeof indexNum !== 'number' || Number.isNaN(indexNum) || indexNum < 0 || indexNum >= this.items.length) {
+      console.warn('No se pudo resolver el índice del item a eliminar');
+      return;
+    }
+
+    const nombre = this.items[indexNum]?.nombre || 'este producto';
+    const ok = await this.confirmar(`¿Estás seguro de que querés eliminar ${nombre}?`);
+    if (!ok) return;
+    const productoEliminado = this.items[indexNum].nombre;
+    this.eliminarProducto(indexNum);
+    this.mostrarNotificacion(`${productoEliminado} eliminado del carrito`, 'info');
+  }
+
+  async solicitarVaciar() {
+    const ok = await this.confirmar('¿Querés vaciar el carrito por completo?');
+    if (!ok) return;
+    this.items = [];
+    this.guardarCarrito();
+    this.actualizarContadorCarrito();
+    this.renderizarCarrito();
+    this.mostrarNotificacion('Carrito vaciado', 'warning');
+  }
+
+  // Eliminar un producto por índice y refrescar UI
+  eliminarProducto(index) {
+    if (index < 0 || index >= this.items.length) return;
+    this.items.splice(index, 1);
+    this.guardarCarrito();
+    this.actualizarContadorCarrito();
+    this.renderizarCarrito();
   }
 
   actualizarCantidad(index, action) {
@@ -159,6 +266,8 @@ class Carrito {
 
       const div = document.createElement('div');
       div.classList.add('carrito-item', 'border-bottom', 'pb-3', 'mb-3', 'animate__animated', 'animate__fadeIn');
+      div.setAttribute('data-index', String(index));
+      div.setAttribute('data-id', producto.id || '');
       div.innerHTML = `
         <div class="row g-2 align-items-center">
           <div class="col-3 col-md-2">
@@ -170,18 +279,18 @@ class Carrito {
           </div>
           <div class="col-7 col-md-2 mt-2 mt-md-0">
             <div class="btn-group btn-group-sm w-100" role="group">
-              <button type="button" class="btn btn-outline-secondary update-quantity" data-index="${index}" data-action="decrease" title="Disminuir cantidad">
+              <button type="button" class="btn btn-outline-secondary update-quantity" data-index="${index}" data-action="decrease" title="Disminuir cantidad" data-id="${producto.id || ''}">
                 <i class="bi bi-dash"></i>
               </button>
               <span class="btn btn-outline-secondary disabled flex-grow-1">${producto.cantidad}</span>
-              <button type="button" class="btn btn-outline-secondary update-quantity" data-index="${index}" data-action="increase" title="Aumentar cantidad">
+              <button type="button" class="btn btn-outline-secondary update-quantity" data-index="${index}" data-action="increase" title="Aumentar cantidad" data-id="${producto.id || ''}">
                 <i class="bi bi-plus"></i>
               </button>
             </div>
           </div>
           <div class="col-5 col-md-2 text-end mt-2 mt-md-0">
             <p class="mb-1 fw-bold">$${subtotal.toLocaleString()}</p>
-            <button class="btn btn-sm btn-outline-danger remove-item" data-index="${index}" title="Eliminar producto">
+            <button class="btn btn-sm btn-outline-danger remove-item" data-index="${index}" data-id="${producto.id || ''}" title="Eliminar producto">
               <i class="bi bi-trash"></i>
             </button>
           </div>

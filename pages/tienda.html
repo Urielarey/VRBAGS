@@ -112,6 +112,10 @@
         .product-image { height: 240px; }
         .add-to-cart-btn { font-size: 1rem; }
       }
+
+      /* Scroll: permitir solo el del documento, sin barras internas */
+      html, body { overflow-y: auto !important; }
+      .container, .row, .products-section { overflow: visible !important; }
     </style>
   </head>
   <body id="top">
@@ -187,26 +191,30 @@
         <section class="text-center mb-5">
           <h1 class="display-4 fw-bold h2">TIENDA</h1>
           <p class="lead">Descubrí nuestra colección de bolsos y carteras</p>
-          <div class="alert alert-info mx-auto pimg" style="max-width: 420px; font-weight: 600; font-size: 1.1rem; background: #f8f9fa; border: 1.5px solid #bdbdbd; color: #222; margin-top: 1.2rem;">
+          <div class="alert alert-info mx-auto pimg" style="max-width:420px; font-weight:600; font-size:1.1rem;
+          background:#fff !important; color:#000 !important;
+          border:1.5px solid #000 !important; border-radius:12px;
+          padding:12px 20px; text-align:center; margin-top:1.2rem;
+          box-shadow:none !important;" data-aos="fade-up">
             Consultar stock y colores
           </div>
-        </section>
+        </section>  
 
         <!-- Bolsos Miri -->
-        <section class="products-section">
-          <h2 class="category-title">Bolsos Miri</h2>
+        <section id="miri" class="products-section" data-aos="fade-up">
+          <h2 class="category-title">Miri</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
               <div class="card product-card h-100">
                 <img src="../assets/Bolso Miri Grande Amarillo.jpg" class="card-img-top product-image" alt="Bolso Miri Grande Amarillo">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Bolso Miri Grande Amarillo</h5>
-                  <p class="card-text">Bolso elegante y espacioso, perfecto para el día a día.</p>
-                  <p class="price">$45.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$105.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="miri-grande-amarillo"
                           data-nombre="Bolso Miri Grande Amarillo"
-                          data-precio="45000"
+                          data-precio="105000"
                           data-imagen="../assets/Bolso Miri Grande Amarillo.jpg">
                     Agregar al Carrito
                   </button>
@@ -219,12 +227,12 @@
                 <img src="../assets/Bolso Miri Grande Marron.jpg" class="card-img-top product-image" alt="Bolso Miri Grande Marron">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Bolso Miri Grande Marrón</h5>
-                  <p class="card-text">Bolso clásico en marrón, ideal para cualquier ocasión.</p>
-                  <p class="price">$45.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$105.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="miri-grande-marron"
                           data-nombre="Bolso Miri Grande Marrón"
-                          data-precio="45000"
+                          data-precio="105000"
                           data-imagen="../assets/Bolso Miri Grande Marron.jpg">
                     Agregar al Carrito
                   </button>
@@ -237,12 +245,12 @@
                 <img src="../assets/Bolso Miri Grande Violeta.jpg" class="card-img-top product-image" alt="Bolso Miri Grande Violeta">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Bolso Miri Grande Violeta</h5>
-                  <p class="card-text">Bolso vibrante en violeta, para destacar tu personalidad.</p>
-                  <p class="price">$45.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$105.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="miri-grande-violeta"
                           data-nombre="Bolso Miri Grande Violeta"
-                          data-precio="45000"
+                          data-precio="105000"
                           data-imagen="../assets/Bolso Miri Grande Violeta.jpg">
                     Agregar al Carrito
                   </button>
@@ -255,12 +263,12 @@
                 <img src="../assets/Bolso Miri Mediano Marron.jpg" class="card-img-top product-image" alt="Bolso Miri Mediano Marron">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Bolso Miri Mediano Marrón</h5>
-                  <p class="card-text">Tamaño mediano perfecto para el trabajo o salidas casuales.</p>
-                  <p class="price">$38.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$95.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="miri-mediano-marron"
                           data-nombre="Bolso Miri Mediano Marrón"
-                          data-precio="38000"
+                          data-precio="95000"
                           data-imagen="../assets/Bolso Miri Mediano Marron.jpg">
                     Agregar al Carrito
                   </button>
@@ -273,12 +281,12 @@
                 <img src="../assets/Bolso Miri Mediano Rojo.jpg" class="card-img-top product-image" alt="Bolso Miri Mediano Rojo">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Bolso Miri Mediano Rojo</h5>
-                  <p class="card-text">Bolso en rojo vibrante, perfecto para agregar color a tu outfit.</p>
-                  <p class="price">$38.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$95.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="miri-mediano-rojo"
                           data-nombre="Bolso Miri Mediano Rojo"
-                          data-precio="38000"
+                          data-precio="95000"
                           data-imagen="../assets/Bolso Miri Mediano Rojo.jpg">
                     Agregar al Carrito
                   </button>
@@ -291,12 +299,12 @@
                 <img src="../assets/Bolso Miri Mediano Verde.jpg" class="card-img-top product-image" alt="Bolso Miri Mediano Verde">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Bolso Miri Mediano Verde</h5>
-                  <p class="card-text">Bolso en verde naturaleza, elegante y versátil.</p>
-                  <p class="price">$38.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$95.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="miri-mediano-verde"
                           data-nombre="Bolso Miri Mediano Verde"
-                          data-precio="38000"
+                          data-precio="95000"
                           data-imagen="../assets/Bolso Miri Mediano Verde.jpg">
                     Agregar al Carrito
                   </button>
@@ -307,20 +315,20 @@
         </section>
 
         <!-- Bolsos Caktus -->
-        <section class="products-section">
-          <h2 class="category-title">Bolsos Caktus</h2>
+        <section id="caktus" class="products-section" data-aos="fade-up">
+          <h2 class="category-title">Caktus</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
               <div class="card product-card h-100">
                 <img src="../assets/Caktus Beige.jpg" class="card-img-top product-image" alt="Caktus Beige">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Caktus Beige</h5>
-                  <p class="card-text">Bolso elegante en beige, perfecto para looks minimalistas.</p>
-                  <p class="price">$42.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$80.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="caktus-beige"
                           data-nombre="Caktus Beige"
-                          data-precio="42000"
+                          data-precio="80000"
                           data-imagen="../assets/Caktus Beige.jpg">
                     Agregar al Carrito
                   </button>
@@ -333,12 +341,12 @@
                 <img src="../assets/Caktus Marron.jpg" class="card-img-top product-image" alt="Caktus Marron">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Caktus Marrón</h5>
-                  <p class="card-text">Bolso clásico en marrón, versátil para cualquier ocasión.</p>
-                  <p class="price">$42.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$80.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="caktus-marron"
                           data-nombre="Caktus Marrón"
-                          data-precio="42000"
+                          data-precio="80000"
                           data-imagen="../assets/Caktus Marron.jpg">
                     Agregar al Carrito
                   </button>
@@ -349,20 +357,20 @@
         </section>
 
         <!-- Bolsos Cata -->
-        <section class="products-section">
-          <h2 class="category-title">Bolsos Cata</h2>
+        <section id="cata" class="products-section" data-aos="fade-up">
+          <h2 class="category-title">Cata</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
               <div class="card product-card h-100">
                 <img src="../assets/Cata Marron.jpg" class="card-img-top product-image" alt="Cata Marron">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Cata Marrón</h5>
-                  <p class="card-text">Bolso elegante en marrón, perfecto para el trabajo.</p>
-                  <p class="price">$48.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$73.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="cata-marron"
                           data-nombre="Cata Marrón"
-                          data-precio="48000"
+                          data-precio="73000"
                           data-imagen="../assets/Cata Marron.jpg">
                     Agregar al Carrito
                   </button>
@@ -375,12 +383,12 @@
                 <img src="../assets/Cata Negra.jpg" class="card-img-top product-image" alt="Cata Negra">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Cata Negra</h5>
-                  <p class="card-text">Bolso clásico en negro, esencial para cualquier guardarropa.</p>
-                  <p class="price">$48.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$73.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="cata-negra"
                           data-nombre="Cata Negra"
-                          data-precio="48000"
+                          data-precio="73000"
                           data-imagen="../assets/Cata Negra.jpg">
                     Agregar al Carrito
                   </button>
@@ -390,21 +398,21 @@
           </div>
         </section>
 
-        <!-- Bolsos Emilio -->
-        <section class="products-section">
-          <h2 class="category-title">Bolsos Emilio</h2>
+        <!-- Bolsos Emilia -->
+        <section class="products-section" data-aos="fade-up">
+          <h2 class="category-title">Emilia</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
               <div class="card product-card h-100">
-                <img src="../assets/Emilio Smail Marron.jpg" class="card-img-top product-image" alt="Emilio Small Marron">
+                <img src="../assets/Emilio Smail Marron.jpg" class="card-img-top product-image" alt="Emilia Small Marron">
                 <div class="card-body d-flex flex-column">
-                  <h5 class="card-title">Emilio Small Marrón</h5>
-                  <p class="card-text">Bolso pequeño y elegante, ideal para salidas nocturnas.</p>
-                  <p class="price">$35.000</p>
+                  <h5 class="card-title">Emilia Small Marrón</h5>
+                  <p class="card-text"></p>
+                  <p class="price">$70.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
-                          data-id="emilio-small-marron"
-                          data-nombre="Emilio Small Marrón"
-                          data-precio="35000"
+                          data-id="emilia-small-marron"
+                          data-nombre="Emilia Small Marrón"
+                          data-precio="70000"
                           data-imagen="../assets/Emilio Smail Marron.jpg">
                     Agregar al Carrito
                   </button>
@@ -415,20 +423,20 @@
         </section>
 
         <!-- Bolsos Golfera -->
-        <section class="products-section">
-          <h2 class="category-title">Bolsos Golfera</h2>
+        <section id="golfera" class="products-section" data-aos="fade-up">
+          <h2 class="category-title">Golfera</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
               <div class="card product-card h-100">
                 <img src="../assets/Golfera Marron.jpg" class="card-img-top product-image" alt="Golfera Marron">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Golfera Marrón</h5>
-                  <p class="card-text">Bolso deportivo en marrón, perfecto para el día a día.</p>
-                  <p class="price">$32.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$55.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="golfera-marron"
                           data-nombre="Golfera Marrón"
-                          data-precio="32000"
+                          data-precio="55000"
                           data-imagen="../assets/Golfera Marron.jpg">
                     Agregar al Carrito
                   </button>
@@ -441,12 +449,12 @@
                 <img src="../assets/Golfera Negra.jpg" class="card-img-top product-image" alt="Golfera Negra">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Golfera Negra</h5>
-                  <p class="card-text">Bolso deportivo en negro, versátil y funcional.</p>
-                  <p class="price">$32.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$55.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="golfera-negra"
                           data-nombre="Golfera Negra"
-                          data-precio="32000"
+                          data-precio="55000"
                           data-imagen="../assets/Golfera Negra.jpg">
                     Agregar al Carrito
                   </button>
@@ -459,12 +467,12 @@
                 <img src="../assets/Golfera Roja.jpg" class="card-img-top product-image" alt="Golfera Roja">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Golfera Roja</h5>
-                  <p class="card-text">Bolso deportivo en rojo, para agregar color a tu outfit.</p>
-                  <p class="price">$32.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$55.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="golfera-roja"
                           data-nombre="Golfera Roja"
-                          data-precio="32000"
+                          data-precio="55000"
                           data-imagen="../assets/Golfera Roja.jpg">
                     Agregar al Carrito
                   </button>
@@ -475,7 +483,7 @@
         </section>
 
         <!-- Mini Chini -->
-        <section class="products-section">
+        <section id="chini" class="products-section" data-aos="fade-up">
           <h2 class="category-title">Mini Chini</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
@@ -483,12 +491,12 @@
                 <img src="../assets/Mini Chini Marron Frente.jpg" class="card-img-top product-image" alt="Mini Chini">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Mini Chini</h5>
-                  <p class="card-text">Mini bolso elegante en marrón, diseño compacto y funcional.</p>
-                  <p class="price">$28.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$75.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="mini-chini"
                           data-nombre="Mini Chini"
-                          data-precio="28000"
+                          data-precio="75000"
                           data-imagen="../assets/Mini Chini Marron Frente.jpg">
                     Agregar al Carrito
                   </button>
@@ -499,7 +507,7 @@
         </section>
 
         <!-- Mochilas -->
-        <section class="products-section">
+        <section id="jackie" class="products-section" data-aos="fade-up">
           <h2 class="category-title">Mochilas</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
@@ -507,12 +515,12 @@
                 <img src="../assets/Mochila Jackie Amarilla.jpg" class="card-img-top product-image" alt="Mochila Jackie Amarilla">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Mochila Jackie Amarilla</h5>
-                  <p class="card-text">Mochila deportiva en amarillo, perfecta para el día a día.</p>
-                  <p class="price">$38.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$85.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="mochila-jackie-amarilla"
                           data-nombre="Mochila Jackie Amarilla"
-                          data-precio="38000"
+                          data-precio="85000"
                           data-imagen="../assets/Mochila Jackie Amarilla.jpg">
                     Agregar al Carrito
                   </button>
@@ -523,7 +531,7 @@
         </section>
 
         <!-- Monederos -->
-        <section class="products-section">
+        <section id="monederos" class="products-section" data-aos="fade-up">
           <h2 class="category-title">Monederos</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
@@ -531,12 +539,12 @@
                 <img src="../assets/Monedero Bordo.jpg" class="card-img-top product-image" alt="Monedero Bordo">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Monedero Bordo</h5>
-                  <p class="card-text">Monedero elegante en bordo, perfecto para organizar tus tarjetas.</p>
-                  <p class="price">$18.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$30.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="monedero-bordo"
                           data-nombre="Monedero Bordo"
-                          data-precio="18000"
+                          data-precio="30000"
                           data-imagen="../assets/Monedero Bordo.jpg">
                     Agregar al Carrito
                   </button>
@@ -549,12 +557,12 @@
                 <img src="../assets/Monedero Marron.jpg" class="card-img-top product-image" alt="Monedero Marron">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Monedero Marrón</h5>
-                  <p class="card-text">Monedero clásico en marrón, versátil y elegante.</p>
-                  <p class="price">$18.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$30.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="monedero-marron"
                           data-nombre="Monedero Marrón"
-                          data-precio="18000"
+                          data-precio="30000"
                           data-imagen="../assets/Monedero Marron.jpg">
                     Agregar al Carrito
                   </button>
@@ -565,7 +573,7 @@
         </section>
 
         <!-- Riñoneras -->
-        <section class="products-section">
+        <section id="rinoneras" class="products-section" data-aos="fade-up">
           <h2 class="category-title">Riñoneras</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
@@ -573,12 +581,12 @@
                 <img src="../assets/Riñonera 3 cierres Marron Claro.jpg" class="card-img-top product-image" alt="Riñonera 3 cierres Marrón Claro">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Riñonera 3 Cierres Marrón Claro</h5>
-                  <p class="card-text">Riñonera funcional con múltiples compartimentos.</p>
-                  <p class="price">$25.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$75.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="rinonera-marron-claro"
                           data-nombre="Riñonera 3 Cierres Marrón Claro"
-                          data-precio="25000"
+                          data-precio="75000"
                           data-imagen="../assets/Riñonera 3 cierres Marron Claro.jpg">
                     Agregar al Carrito
                   </button>
@@ -590,12 +598,12 @@
                 <img src="../assets/Riñonera 3 cierres Marron Oscuro.jpg" class="card-img-top product-image" alt="Riñonera 3 cierres Marrón Oscuro">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Riñonera 3 Cierres Marrón Oscuro</h5>
-                  <p class="card-text">Riñonera funcional en marrón oscuro, perfecta para el deporte.</p>
-                  <p class="price">$25.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$75.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="rinonera-marron-oscuro"
                           data-nombre="Riñonera 3 Cierres Marrón Oscuro"
-                          data-precio="25000"
+                          data-precio="75000"
                           data-imagen="../assets/Riñonera 3 cierres Marron Oscuro.jpg">
                     Agregar al Carrito
                   </button>
@@ -606,7 +614,7 @@
         </section>
 
         <!-- Paris -->
-        <section class="products-section">
+        <section id="paris" class="products-section" data-aos="fade-up">
           <h2 class="category-title">Paris</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
@@ -614,12 +622,12 @@
                 <img src="../assets/Paris Dorada.jpg" class="card-img-top product-image" alt="Paris Dorada">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Paris Dorada</h5>
-                  <p class="card-text">Bolso elegante en dorado, perfecto para ocasiones especiales.</p>
-                  <p class="price">$55.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$80.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="paris-dorada"
                           data-nombre="Paris Dorada"
-                          data-precio="55000"
+                          data-precio="80000"
                           data-imagen="../assets/Paris Dorada.jpg">
                     Agregar al Carrito
                   </button>
@@ -630,7 +638,7 @@
         </section>
 
         <!-- Roma -->
-        <section class="products-section">
+        <section id="roma" class="products-section" data-aos="fade-up">
           <h2 class="category-title">Roma</h2>
           <div class="row g-4">
             <div class="col-12 col-md-6 col-lg-4">
@@ -638,12 +646,12 @@
                 <img src="../assets/Roma Marron.jpg" class="card-img-top product-image" alt="Roma Marrón">
                 <div class="card-body d-flex flex-column">
                   <h5 class="card-title">Roma Marrón</h5>
-                  <p class="card-text">Bolso elegante inspirado en el estilo italiano.</p>
-                  <p class="price">$52.000</p>
+                  <p class="card-text"></p>
+                  <p class="price">$85.000</p>
                   <button class="btn btn-primary add-to-cart-btn" 
                           data-id="roma-marron"
                           data-nombre="Roma Marrón"
-                          data-precio="52000"
+                          data-precio="85000"
                           data-imagen="../assets/Roma Marron.jpg">
                     Agregar al Carrito
                   </button>
@@ -652,13 +660,54 @@
             </div>
           </div>
         </section>
+
+                <!-- Troya -->
+                <section class="products-section" data-aos="fade-up">
+                  <h2 class="category-title">Troya</h2>
+                  <div class="row g-4">
+                    <div class="col-12 col-md-6 col-lg-4">
+                      <div class="card product-card h-100">
+                        <img src="../assets/troyamarron.jpg" class="card-img-top product-image" alt="Troya Marron">
+                        <div class="card-body d-flex flex-column">
+                          <h5 class="card-title">Troya Marron</h5>
+                          <p class="card-text"></p>
+                          <p class="price">$110.000</p>
+                          <button class="btn btn-primary add-to-cart-btn" 
+                                  data-id="troya-marron"
+                                  data-nombre="Troya Marron"
+                                  data-precio="110000"
+                                  data-imagen="../assets/troyamarron.jpg">
+                            Agregar al Carrito
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12 col-md-6 col-lg-4">
+                      <div class="card product-card h-100">
+                        <img src="../assets/troyaazul.jpg" class="card-img-top product-image" alt="Troya Azul">
+                        <div class="card-body d-flex flex-column">
+                          <h5 class="card-title">Troya Azul</h5>
+                          <p class="card-text"></p>
+                          <p class="price">$110.000</p>
+                          <button class="btn btn-primary add-to-cart-btn" 
+                                  data-id="troya-azul"
+                                  data-nombre="Troya Azul"
+                                  data-precio="110000"
+                                  data-imagen="../assets/troyaazul.jpg">
+                            Agregar al Carrito
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
       </div>
     </main>
     <div style="padding-bottom:30px;"></div>
 
     <footer class="bg-dark text-light py-4 mt-5" style="color: #fff;">
       <div class="container text-center">
-        <p style="color: #fff;">Powered by: byurodev.site</p>
+        <p style="color: #fff;">Powered by: <a href="https://www.byurodev.site" target="_blank" rel="noopener noreferrer" style="color:#fff; text-decoration:none;">byurodev.site</a></p>
         <p style="color: #fff;">&copy;VRBAGS - Todos los derechos reservados</p>
       </div>
     </footer>
