@@ -220,7 +220,7 @@ class Carrito {
   }
 
   actualizarContadorCarrito() {
-    const cartCountElements = document.querySelectorAll("#cart-count");
+    const cartCountElements = document.querySelectorAll(".cart-count");
     const totalItems = this.items.reduce((total, item) => total + item.cantidad, 0);
     
     cartCountElements.forEach(el => {

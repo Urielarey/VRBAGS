@@ -15,8 +15,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=7" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>VRBAGS - Inicio</title>
-    <link rel="canonical" href="https://byuroindumentaria.com" />
-    <link rel="icon" type="Byuro.png" href="assets/VR BAGS.png" />
+    <link rel="canonical" href="https://www.vrbags.store" />
+    <link rel="icon" type="Byuro.png" href="./assets/VR BAGS.png BAGS.png" />
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css"
       rel="stylesheet"
@@ -31,46 +31,6 @@
   </head>
 
   <body id="top">
-    <style>
-      html, body { overflow-x: hidden !important; background:#fff; color:#111; }
-      .container, .container-fluid, .navbar, footer { overflow-x: hidden; }
-      /* Nav unificado con el resto de páginas */
-      /* Sin estilos especiales aquí para mantener consistencia */
-      .hero {
-        position: relative;
-        min-height: 70vh;
-        display: grid;
-        place-items: center;
-        background: linear-gradient(180deg,#000 0%, #111 60%, #fff 100%);
-        color:#fff;
-      }
-      .hero-card {
-        background: rgba(0,0,0,.6);
-        border: .0625rem solid rgba(255,255,255,.15);
-        border-radius:1.5rem;
-        padding: 40px;
-        max-width: 56.25rem;
-        width: 92%;
-        text-align: center;
-      }
-      .hero h1 { font-weight:800; letter-spacing:.125rem; margin-bottom:8px; }
-      .hero p { color:#e5e5e5; margin-bottom:24px; }
-      .btn-cta { background:#fff; color:#000; border:none; padding:.75rem 1.75rem; border-radius:1.875rem; font-weight:700; text-decoration:none; display:inline-block; }
-      .btn-cta:hover { background:#f1f1f1; }
-      .mono { filter: grayscale(100%); transition: .3s ease; }
-      .mono:hover { filter: grayscale(0%); }
-      .section-title { font-weight:800; letter-spacing:.125rem; text-transform:uppercase; text-align:center; margin:3.75rem 0 1.5rem; }
-      .feature { text-align:center; padding:1.5rem; border:.0625rem solid #eee; border-radius:1rem; }
-      .feature h6 { font-weight:700; }
-      .gallery img { object-fit: contain; width:100%; height:auto; max-height: 26.25rem; border-radius:1rem; background:#f8f9fa; padding:.75rem; }
-      footer { background:#000; color:#fff; }
-      footer a { color:#fff; }
-      @media (max-width: 35.9988rem) {
-        .hero-card { padding: 28px; }
-        .hero h1 { font-size: 28.8px; }
-        .gallery img { max-height: 15rem; padding:.5rem; }
-      }
-    </style>
     <a href="#top" class="scroll-up-btn">↑</a>
     <header>
       <article class="u-envios">
@@ -90,8 +50,7 @@
               height="24"
             />
             <span
-              id="cart-count"
-              class="u-cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill"
+              class="cart-count u-cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill"
             >
               0
             </span>
@@ -131,8 +90,7 @@
                 height="24"
               />
               <span
-                id="cart-count"
-                class="u-cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                class="cart-count u-cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill"
               >
                 0
               </span>
@@ -144,7 +102,7 @@
     <main>
       <!-- Logo destacado -->
       <section class="py-5 text-center">
-        <img src="assets/VR BAGS.png" alt="VRBAGS" style="width:17.5rem; max-width:85vw; height:auto;" class="mono"/>
+        <img src="assets/VR BAGS.png" alt="VRBAGS" class="mono home-logo"/>
       </section>
 
       <!-- Hero -->
@@ -216,13 +174,13 @@
           </div>
           <!-- Mochila -->
           <div class="col-12 col-sm-6 col-md-4 col-lg-3 gallery-item hide-mobile">
-            <a href="./pages/tienda.html#jackie"" class="d-block">
+            <a href="./pages/tienda.html#jackie" class="d-block">
               <img class="w-100 mono gallery-img" src="assets/Mochila Jackie Amarilla.jpg" alt="Mochila Jackie Amarilla"/>
             </a>
           </div>
           <!-- Riñonera -->
           <div class="col-12 col-sm-6 col-md-4 col-lg-3 gallery-item hide-mobile">
-            <a href="./pages/tienda.html#riño" class="d-block">
+            <a href="./pages/tienda.html#rinoneras" class="d-block">
               <img class="w-100 mono gallery-img" src="assets/Riñonera 3 cierres Marron Claro.jpg" alt="Riñonera Marrón Claro"/>
             </a>
           </div>
@@ -236,10 +194,10 @@
       </section>
     </main>
     <div style="padding-bottom:1.875rem;"></div>
-    <footer class="bg-dark text-light py-4 mt-5" style="color: #fff;">
+    <footer class="bg-dark text-light py-4 mt-5">
       <div class="container text-center">
-        <p style="color: #fff;">Powered by: <a href="https://www.byurodev.site" target="_blank" rel="noopener noreferrer" style="color:#fff; text-decoration:none;">byurodev.site</a></p>
-        <p style="color: #fff;">&copy;VRBAGS - Todos los derechos reservados</p>
+        <p>Powered by: <a href="https://www.byurodev.site" target="_blank" rel="noopener noreferrer" class="sin-decoracion">byurodev.site</a></p>
+        <p>&copy;VRBAGS - Todos los derechos reservados</p>
       </div>
     </footer>
     <script
@@ -248,10 +206,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
+    <script src="./js/main.js"></script>
     <script src="./js/carrito.js"></script>
-    <script src="./js/mercadopago.js"></script>
   </body>
 </html>

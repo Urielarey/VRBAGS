@@ -27,93 +27,6 @@
       rel="stylesheet"
     />
     <style>
-      .product-card {
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        height: 100%;
-        border: 1px solid var(--color-border);
-        background: var(--color-background);
-      }
-      .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        border-color: var(--color-primary);
-      }
-      .product-image {
-        height: 300px;
-        object-fit: contain;
-        width: 100%;
-        padding: 10px;
-        background: var(--color-background-alt);
-      }
-      .price {
-        font-size: 1.2rem;
-        font-weight: bold;
-        color: var(--color-success);
-        font-family: 'Montserrat', sans-serif;
-      }
-      .add-to-cart-btn {
-        width: 100%;
-        margin-top: auto;
-        background-color: var(--color-primary);
-        border-color: var(--color-primary);
-        color: var(--color-secondary);
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 600;
-        transition: all 0.3s ease;
-      }
-      .add-to-cart-btn:hover {
-        background-color: var(--color-accent);
-        border-color: var(--color-accent);
-        transform: translateY(-2px);
-      }
-      .category-title {
-        color: var(--color-text);
-        margin-bottom: 30px;
-        text-align: center;
-        font-weight: 700;
-        font-family: 'Montserrat', sans-serif;
-        font-size: 2rem;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-      }
-      .products-section {
-        margin-bottom: 50px;
-        padding: 20px 0;
-      }
-      .card-title {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 600;
-        color: var(--color-text);
-      }
-      .card-text {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        color: var(--color-text-light);
-      }
-      .display-4 {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 900;
-        color: var(--color-primary);
-      }
-      .lead {
-        font-family: 'Montserrat', sans-serif;
-        font-weight: 400;
-        color: var(--color-text-light);
-      }
-
-      /* Responsive: celulares y tablets */
-      @media (max-width: 575.98px) {
-        .product-image { height: 200px; }
-        .category-title { font-size: 1.4rem; margin-bottom: 20px; }
-        .add-to-cart-btn { font-size: 0.95rem; padding: 0.6rem 0.75rem; }
-      }
-
-      @media (min-width: 576px) and (max-width: 991.98px) {
-        .product-image { height: 240px; }
-        .add-to-cart-btn { font-size: 1rem; }
-      }
-
-      /* Scroll: permitir solo el del documento, sin barras internas */
       html, body { overflow-y: auto !important; }
       .container, .row, .products-section { overflow: visible !important; }
     </style>
@@ -142,8 +55,7 @@
               height="24"
             />
             <span
-              id="cart-count"
-              class="u-cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill"
+              class="cart-count u-cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill"
             >
               0
             </span>
@@ -175,8 +87,7 @@
                 height="24"
               />
               <span
-                id="cart-count"
-                class="u-cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill"
+                class="cart-count u-cart-count position-absolute top-0 start-100 translate-middle badge rounded-pill"
               >
                 0
               </span>
@@ -186,16 +97,12 @@
       </nav>
     </header>
     
-    <main style="margin-top: 120px;">
+    <main class="main-tienda">
       <div class="container">
         <section class="text-center mb-5">
           <h1 class="display-4 fw-bold h2">TIENDA</h1>
           <p class="lead">Descubrí nuestra colección de bolsos y carteras</p>
-          <div class="alert alert-info mx-auto pimg" style="max-width:420px; font-weight:600; font-size:1.1rem;
-          background:#fff !important; color:#000 !important;
-          border:1.5px solid #000 !important; border-radius:12px;
-          padding:12px 20px; text-align:center; margin-top:1.2rem;
-          box-shadow:none !important;" data-aos="fade-up">
+          <div class="alert alert-info mx-auto pimg alert-shop" data-aos="fade-up">
             Consultar stock y colores
           </div>
         </section>  
@@ -705,10 +612,10 @@
     </main>
     <div style="padding-bottom:30px;"></div>
 
-    <footer class="bg-dark text-light py-4 mt-5" style="color: #fff;">
+    <footer class="bg-dark text-light py-4 mt-5">
       <div class="container text-center">
-        <p style="color: #fff;">Powered by: <a href="https://www.byurodev.site" target="_blank" rel="noopener noreferrer" style="color:#fff; text-decoration:none;">byurodev.site</a></p>
-        <p style="color: #fff;">&copy;VRBAGS - Todos los derechos reservados</p>
+        <p>Powered by: <a href="https://www.byurodev.site" target="_blank" rel="noopener noreferrer" class="sin-decoracion">byurodev.site</a></p>
+        <p>&copy;VRBAGS - Todos los derechos reservados</p>
       </div>
     </footer>
 
@@ -718,9 +625,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-      AOS.init();
-    </script>
+    <script src="../js/main.js"></script>
     <script src="../js/carrito.js"></script>
   </body>
 </html>
