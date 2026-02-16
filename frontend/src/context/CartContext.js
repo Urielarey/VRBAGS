@@ -20,9 +20,9 @@ export const CartProvider = ({ children }) => {
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000/api';
 
   // Obtener token de autenticación
-  const getAuthToken = () => {
+  const getAuthToken = useCallback(() => {
     return localStorage.getItem('token');
-  };
+  }, []);
 
   // Crear o obtener carrito
   const getOrCreateCart = useCallback(async () => {

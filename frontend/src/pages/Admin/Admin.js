@@ -27,21 +27,12 @@ const Admin = () => {
   const [editingProduct, setEditingProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    // Verificar si es admin (este control ya está en ProtectedRoute, pero es defensa adicional)
-    if (!isAdmin()) {
-      navigate('/');
-      return;
-    }
-    loadData();
-  }, [navigate, isAdmin, loadData]);
-
-  const getAuthHeaders = () => {
+  const getAuthHeaders = useCallback(() => {
     const token = localStorage.getItem('token');
     return {
       headers: { Authorization: `Bearer ${token}` }
     };
-  };
+  }, []);
 
   const loadData = useCallback(async () => {
     setLoading(true);
@@ -68,6 +59,15 @@ const Admin = () => {
       setLoading(false);
     }
   }, [getAuthHeaders]);
+
+  useEffect(() => {
+    // Verificar si es admin (este control ya está en ProtectedRoute, pero es defensa adicional)
+    if (!isAdmin()) {
+      navigate('/');
+      return;
+    }
+    loadData();
+  }, [navigate, isAdmin, loadData]);
 
   // Crear/Actualizar producto
   const handleSaveProduct = async (e) => {

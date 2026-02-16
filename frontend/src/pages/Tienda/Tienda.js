@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { useCart } from '../../context/CartContext';
 import Loader from '../../components/Loader/Loader';
 import './Tienda.css';
 
