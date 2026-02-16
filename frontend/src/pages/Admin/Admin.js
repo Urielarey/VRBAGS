@@ -4,7 +4,12 @@ import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
 import './Admin.css';
 
-const API_URL = process.env.REACT_APP_API_URL;
+const API_URL =
+  process.env.REACT_APP_API_URL ||
+  (process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : "https://vrbags-backend-production.up.railway.app");
+
 
 const Admin = () => {
   const navigate = useNavigate();
