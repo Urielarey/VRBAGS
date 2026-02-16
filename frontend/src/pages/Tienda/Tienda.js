@@ -6,7 +6,6 @@ import Loader from '../../components/Loader/Loader';
 import './Tienda.css';
 
 const Tienda = () => {
-  const { addToCart } = useCart();
   const [loading, setLoading] = useState(true);
   const [groupedProducts, setGroupedProducts] = useState({});
   const [error, setError] = useState(null);

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 
 const CartContext = createContext();
@@ -25,7 +25,7 @@ export const CartProvider = ({ children }) => {
   };
 
   // Crear o obtener carrito
-  const getOrCreateCart = async () => {
+  const getOrCreateCart = useCallback(async () => {
     try {
       setLoading(true);
       const token = getAuthToken();
@@ -64,7 +64,7 @@ export const CartProvider = ({ children }) => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL, getAuthToken]);
 
   // Función auxiliar para obtener ID normalizado del producto
   const getProductId = (product) => {
@@ -294,7 +294,7 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     getOrCreateCart();
-  }, []);
+  }, [getOrCreateCart]);
 
   const value = {
     cart,

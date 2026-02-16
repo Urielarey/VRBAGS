@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import axios from 'axios';
@@ -34,7 +34,7 @@ const Admin = () => {
       return;
     }
     loadData();
-  }, [navigate, isAdmin]);
+  }, [navigate, isAdmin, loadData]);
 
   const getAuthHeaders = () => {
     const token = localStorage.getItem('token');
@@ -43,7 +43,7 @@ const Admin = () => {
     };
   };
 
-  const loadData = async () => {
+  const loadData = useCallback(async () => {
     setLoading(true);
     try {
       // Cargar productos
@@ -67,7 +67,7 @@ const Admin = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [getAuthHeaders]);
 
   // Crear/Actualizar producto
   const handleSaveProduct = async (e) => {
