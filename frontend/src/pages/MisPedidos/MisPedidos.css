@@ -1,0 +1,25 @@
+/* Estilos específicos solo para la página Mis Pedidos */
+/* Esto asegura que el footer quede abajo sin afectar otras páginas */
+.mis-pedidos-page {
+  min-height: calc(100vh - 200px);
+  padding-bottom: 2rem;
+}
+
+.mis-pedidos-page .container {
+  width: 100%;
+  max-width: 900px;
+}
+
+.tickets-list {
+  margin-top: 1rem;
+}
+
+.tickets-list .card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+.tickets-list .card-header {
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #ddd;
+}

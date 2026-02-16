@@ -1,0 +1,55 @@
+const mongoose = require('mongoose');
+
+/**
+ * Modelo de Producto
+ */
+const productSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  description: {
+    type: String,
+    default: ''
+  },
+  code: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  price: {
+    type: Number,
+    required: true,
+    min: 0
+  },
+  status: {
+    type: Boolean,
+    default: true
+  },
+  stock: {
+    type: Number,
+    required: true,
+    min: 0,
+    default: 0
+  },
+  category: {
+    type: String,
+    required: true,
+    trim: true
+  },
+  thumbnails: {
+    type: [String],
+    default: []
+  }
+}, {
+  timestamps: true
+});
+
+// Índices para búsquedas eficientes
+productSchema.index({ category: 1 });
+productSchema.index({ status: 1 });
+productSchema.index({ price: 1 });
+productSchema.index({ code: 1 }, { unique: true });
+
+module.exports = mongoose.model('Product', productSchema);

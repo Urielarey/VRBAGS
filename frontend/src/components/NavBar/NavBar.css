@@ -1,0 +1,180 @@
+/* Estilos del NavBar se mantienen iguales al CSS original */
+/* No modificar estilos según requerimientos */
+
+/* Dropdown de Mi Cuenta */
+.nav-account-dropdown {
+  position: relative;
+  z-index: 1050;
+}
+
+.nav-account-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  border: 1px solid #333 !important;
+  color: #fff !important;
+  background-color: #000 !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-account-btn:hover {
+  background-color: #222 !important;
+  border-color: #555 !important;
+}
+
+.account-icon {
+  font-size: 1.1rem;
+  display: inline-block;
+}
+
+.account-text {
+  font-weight: 500;
+}
+
+/* Menu desplegable */
+
+.account-menu {
+  position: fixed;
+  top: 70px;
+  right: 20px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  min-width: 220px;
+  z-index: 3000;
+  overflow: hidden;
+}
+
+
+
+.account-menu.show {
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.account-menu-header {
+  padding: 0.75rem 1rem;
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+.account-menu-item {
+  display: block;
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: none;
+  text-align: left;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: #333;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.account-menu-item:hover {
+  background-color: #f0f0f0;
+  padding-left: 1.2rem;
+}
+
+.account-menu-item.admin-item {
+  color: #0056b3;
+  font-weight: 600;
+}
+
+.account-menu-item.logout-item {
+  color: #dc3545;
+}
+
+.account-menu-item.logout-item:hover {
+  background-color: #ffe6e6;
+}
+
+.account-menu hr {
+  margin: 0.5rem 0;
+}
+
+
+
+/* Evita que el navbar fixed genere scroll */
+.navbar {
+  overflow: visible !important;
+}
+
+/* Prevención extra de scroll horizontal */
+body {
+  overflow-x: hidden;
+}
+
+@media (max-width: 768px) {
+  /* CONTENEDOR */
+  .nav-account-dropdown {
+    width: 100%;
+    margin: 0.5rem 0 0 0 !important;
+    padding: 0;
+    display: block;
+  }
+
+  /* BOTÓN */
+  .nav-account-btn {
+    width: 100%;
+    height: 44px;
+    justify-content: flex-start;
+    gap: 0.5rem;
+
+    background: #111 !important;
+    border: none !important;
+    border-radius: 6px;
+
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 0;
+  }
+
+  .nav-account-btn:hover {
+    background: #222 !important;
+  }
+
+  /* TEXTO + ÍCONO */
+  .account-text {
+    display: inline;
+  }
+
+  .account-icon {
+    font-size: 1rem;
+  }
+
+  /* DROPDOWN → INLINE, NO FLOTANTE */
+  .account-menu {
+    position: static;
+    transform: none;
+    min-width: 100%;
+    max-width: 100%;
+    margin-top: 0.5rem;
+    border-radius: 6px;
+  }
+
+  /* NAVBAR */
+  .navbar-collapse {
+    padding-bottom: 0.5rem;
+  }
+}
+
