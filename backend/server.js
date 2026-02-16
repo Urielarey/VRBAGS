@@ -16,9 +16,13 @@ connectDB();
 // Middlewares de seguridad
 app.use(helmet());
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:3001',
+  origin: [
+    'http://localhost:3001',
+    'https://www.vrbags.store'
+  ],
   credentials: true
 }));
+
 
 // Rate limiting
 const limiter = rateLimit({
