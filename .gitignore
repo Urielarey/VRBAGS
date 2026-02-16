@@ -29,6 +29,4 @@ Thumbs.db
 # MongoDB
 data/
 
-# Assets y CSS (si se copian al frontend)
-frontend/public/assets/
-frontend/public/css/
+# Nota: NO ignores frontend/public/assets/ porque son imágenes del sitio
