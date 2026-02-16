@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { useAuth } from '../../context/AuthContext';
 import Loader from '../../components/Loader/Loader';
@@ -12,13 +12,7 @@ const MisPedidos = () => {
 
   const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000/api';
 
-  useEffect(() => {
-    if (isAuthenticated() && user) {
-      loadTickets();
-    }
-  }, [user, isAuthenticated]);
-
-  const loadTickets = async () => {
+  const loadTickets = useCallback(async () => {
     try {
       setLoading(true);
       setError(null);
@@ -37,7 +31,13 @@ const MisPedidos = () => {
     } finally {
       setLoading(false);
     }
-  };
+  }, [API_URL]);
+
+  useEffect(() => {
+    if (isAuthenticated() && user) {
+      loadTickets();
+    }
+  }, [user, isAuthenticated, loadTickets]);
 
   const getStatusBadgeClass = (status) => {
     switch(status) {

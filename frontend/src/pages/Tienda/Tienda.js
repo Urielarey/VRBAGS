@@ -7,7 +7,6 @@ import './Tienda.css';
 
 const Tienda = () => {
   const { addToCart } = useCart();
-  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [groupedProducts, setGroupedProducts] = useState({});
   const [error, setError] = useState(null);
@@ -23,12 +22,11 @@ const Tienda = () => {
       try {
         setLoading(true);
         setError(null);
-        const API_URL = 'http://localhost:3000/api';
+        const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000/api';
         const response = await axios.get(`${API_URL}/products?limit=100`);
         
         if (response.data.status === 'success') {
           const productsData = response.data.payload || [];
-          setProducts(productsData);
           
           // Agrupar productos por categoría (manejar productos sin categoría)
           const grouped = {};
@@ -62,10 +60,6 @@ const Tienda = () => {
       return product.thumbnails[0];
     }
     return '/assets/VR BAGS.png';
-  };
-
-  const handleAddToCart = (product) => {
-    addToCart(product, 1);
   };
 
   if (loading) {

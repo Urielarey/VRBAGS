@@ -11,7 +11,6 @@ const Admin = () => {
   
   // Estados para productos
   const [products, setProducts] = useState([]);
-  const [users, setUsers] = useState([]);
   const [tickets, setTickets] = useState([]);
   
   // Estados para formulario
@@ -74,7 +73,6 @@ const Admin = () => {
   const handleSaveProduct = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem('token');
       const dataToSend = {
         ...formData,
         price: parseFloat(formData.price),
