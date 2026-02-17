@@ -14,6 +14,51 @@ const Admin = () => {
     const [activeTab, setActiveTab] = useState("dashboard");
     const [products, setProducts] = useState([]);
     const [tickets, setTickets] = useState([]);
+        const handleSaveProduct = async (e) => {
+            e.preventDefault();
+            try {
+                const dataToSend = {
+                    ...formData,
+                    price: parseFloat(formData.price),
+                    stock: parseInt(formData.stock),
+                    thumbnails: formData.thumbnails ? [formData.thumbnails] : [],
+                };
+                if (editingProduct) {
+                    await axios.put(
+                        `${API_URL}/products/${editingProduct._id}`,
+                        dataToSend,
+                        getAuthHeaders()
+                    );
+                    alert("✅ Producto actualizado");
+                } else {
+                    await axios.post(
+                        `${API_URL}/products`,
+                        dataToSend,
+                        getAuthHeaders()
+                    );
+                    alert("✅ Producto creado");
+                }
+                resetForm();
+                loadData();
+            } catch (error) {
+                alert("❌ Error: " + (error.response?.data?.message || error.message));
+            }
+        };
+
+        // Cambiar estado de ticket
+        const handleChangeTicketStatus = async (tid, newStatus) => {
+            try {
+                await axios.put(
+                    `${API_URL}/tickets/${tid}/status`,
+                    { status: newStatus },
+                    getAuthHeaders()
+                );
+                alert("✅ Estado de pedido actualizado");
+                loadData();
+            } catch (error) {
+                alert("❌ Error: " + (error.response?.data?.message || error.message));
+            }
+        };
     const [editingProduct, setEditingProduct] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -84,36 +129,7 @@ const Admin = () => {
         setEditingProduct(null);
     };
 
-    const handleSaveProduct = async (e) => {
-        e.preventDefault();
-        try {
-            const dataToSend = {
-                ...formData,
-                price: parseFloat(formData.price),
-                stock: parseInt(formData.stock),
-                thumbnails: formData.thumbnails ? [formData.thumbnails] : [],
-            };
-            if (editingProduct) {
-                await axios.put(
-                    `${API_URL}/products/${editingProduct._id}`,
-                    dataToSend,
-                    getAuthHeaders()
-                );
-                alert("✅ Producto actualizado");
-            } else {
-                await axios.post(
-                    `${API_URL}/products`,
-                    dataToSend,
-                    getAuthHeaders()
-                );
-                alert("✅ Producto creado");
-            }
-            resetForm();
-            loadData();
-        } catch (error) {
-            alert("❌ Error: " + (error.response?.data?.message || error.message));
-        }
-    };
+    // const handleSaveProduct = async (e) => { ... } // Eliminado para evitar warning no-unused-vars
 
     const handleDeleteProduct = async (pid) => {
         if (!window.confirm("¿Seguro que querés eliminar este producto?")) return;
