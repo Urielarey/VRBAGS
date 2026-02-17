@@ -1,109 +1,212 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import axios from "axios";
+import "./Admin.css";
 
 const Admin = () => {
-  const [activeTab, setActiveTab] = useState('productos'); // para controlar pestañas
-  const [productos, setProductos] = useState([]);
-  const [tickets, setTickets] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null); // para errores de autenticación
+    const navigate = useNavigate();
+    const { user, isAdmin } = useAuth();
 
-  const token = localStorage.getItem('token'); // tu token de admin
+    const [activeTab, setActiveTab] = useState("dashboard");
+    const [products, setProducts] = useState([]);
+    const [tickets, setTickets] = useState([]);
+    const [editingProduct, setEditingProduct] = useState(null);
+    const [loading, setLoading] = useState(true);
 
-  // Fetch de tickets
-  const fetchTickets = async () => {
-    if (!token) {
-      setError('Debes iniciar sesión');
-      return;
+    const [formData, setFormData] = useState({
+        title: "",
+        description: "",
+        code: "",
+        price: "",
+        stock: "",
+        category: "",
+        status: true,
+        thumbnails: "",
+    });
+
+    const getAuthHeaders = useCallback(() => {
+        const token = localStorage.getItem("token");
+        return {
+            headers: { Authorization: `Bearer ${token}` },
+        };
+    }, []);
+
+    const loadData = useCallback(async () => {
+        setLoading(true);
+        try {
+            const prodResponse = await axios.get(
+                "http://localhost:3000/api/products?limit=100",
+                getAuthHeaders()
+            );
+
+            if (prodResponse.data.status === "success") {
+                setProducts(prodResponse.data.payload);
+            }
+
+            const ticketResponse = await axios.get(
+                "http://localhost:3000/api/tickets/all",
+                getAuthHeaders()
+            );
+
+            if (ticketResponse.data.status === "success") {
+                setTickets(ticketResponse.data.payload || []);
+            }
+        } catch (error) {
+            console.error("Error cargando datos:", error);
+        } finally {
+            setLoading(false);
+        }
+    }, [getAuthHeaders]);
+
+    useEffect(() => {
+        if (!isAdmin()) {
+            navigate("/");
+            return;
+        }
+        loadData();
+    }, [navigate, isAdmin, loadData]);
+
+    const handleSaveProduct = async (e) => {
+        e.preventDefault();
+
+        try {
+            const dataToSend = {
+                ...formData,
+                price: parseFloat(formData.price),
+                stock: parseInt(formData.stock),
+                thumbnails: formData.thumbnails ? [formData.thumbnails] : [],
+            };
+
+            if (editingProduct) {
+                await axios.put(
+                    `http://localhost:3000/api/products/${editingProduct._id}`,
+                    dataToSend,
+                    getAuthHeaders()
+                );
+                alert("✅ Producto actualizado");
+            } else {
+                await axios.post(
+                    "http://localhost:3000/api/products",
+                    dataToSend,
+                    getAuthHeaders()
+                );
+                alert("✅ Producto creado");
+            }
+
+            resetForm();
+            loadData();
+        } catch (error) {
+            alert("❌ Error: " + (error.response?.data?.message || error.message));
+        }
+    };
+
+    const handleDeleteProduct = async (pid) => {
+        if (!window.confirm("¿Seguro que querés eliminar este producto?")) return;
+
+        try {
+            await axios.delete(
+                `http://localhost:3000/api/products/${pid}`,
+                getAuthHeaders()
+            );
+            alert("✅ Producto eliminado");
+            loadData();
+        } catch (error) {
+            alert("❌ Error: " + (error.response?.data?.message || error.message));
+        }
+    };
+
+    const handleEditProduct = (product) => {
+        setEditingProduct(product);
+        setFormData({
+            title: product.title,
+            description: product.description,
+            code: product.code,
+            price: product.price,
+            stock: product.stock,
+            category: product.category,
+            status: product.status,
+            thumbnails: product.thumbnails?.[0] || "",
+        });
+        setActiveTab("create-product");
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+        navigate("/");
+        window.location.reload();
+    };
+
+    if (!user) {
+        return <div className="container mt-5">Cargando...</div>;
     }
-    try {
-      setLoading(true);
-      const response = await axios.get('/api/tickets/all', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setTickets(response.data);
-      setError(null);
-    } catch (err) {
-      if (err.response && err.response.status === 401) {
-        setError('No autorizado. Inicia sesión.');
-      } else {
-        setError('Error cargando tickets.');
-      }
-      console.error('Error cargando tickets:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
 
-  // Fetch de productos
-  const fetchProductos = async () => {
-    if (!token) {
-      setError('Debes iniciar sesión');
-      return;
-    }
-    try {
-      setLoading(true);
-      const response = await axios.get('/api/products', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      setProductos(response.data);
-      setError(null);
-    } catch (err) {
-      if (err.response && err.response.status === 401) {
-        setError('No autorizado. Inicia sesión.');
-      } else {
-        setError('Error cargando productos.');
-      }
-      console.error('Error cargando productos:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    return (
+        <div className="admin-container">
+            <div className="admin-header">
+                <h1>Panel de Control - VRBAGS</h1>
+                <div className="admin-user-info">
+                    <span>
+                        👤 {user.first_name} {user.last_name} (
+                        {user.role.toUpperCase()})
+                    </span>
+                    <button
+                        className="btn btn-danger btn-sm"
+                        onClick={handleLogout}
+                    >
+                        Salir
+                    </button>
+                </div>
+            </div>
 
-  useEffect(() => {
-    fetchProductos();
-    fetchTickets();
-  }, []); // sin dependencias innecesarias
+            <div className="admin-tabs">
+                <button
+                    className={`tab-btn ${activeTab === "dashboard" ? "active" : ""
+                        }`}
+                    onClick={() => setActiveTab("dashboard")}
+                >
+                    📊 Dashboard
+                </button>
 
-  if (error) {
-    return <div style={{ color: 'red' }}>{error}</div>;
-  }
+                <button
+                    className={`tab-btn ${activeTab === "products" ? "active" : ""
+                        }`}
+                    onClick={() => setActiveTab("products")}
+                >
+                    📦 Productos ({products.length})
+                </button>
 
-  if (loading) {
-    return <div>Cargando...</div>;
-  }
+                <button
+                    className={`tab-btn ${activeTab === "create-product" ? "active" : ""
+                        }`}
+                    onClick={() => setActiveTab("create-product")}
+                >
+                    ➕ Nuevo Producto
+                </button>
+            </div>
 
-  return (
-    <div>
-      <h1>Panel Admin</h1>
-      <div>
-        <button onClick={() => setActiveTab('productos')}>Productos</button>
-        <button onClick={() => setActiveTab('tickets')}>Tickets</button>
-      </div>
-
-      {activeTab === 'productos' && (
-        <div>
-          <h2>Productos</h2>
-          <ul>
-            {productos.map((p) => (
-              <li key={p._id}>{p.nombre}</li>
-            ))}
-          </ul>
+            {loading ? (
+                <div className="loading">⏳ Cargando...</div>
+            ) : (
+                <div className="admin-content">
+                    {activeTab === "products" &&
+                        products.map((p) => (
+                            <div key={p._id}>
+                                <strong>{p.title}</strong> - $
+                                {p.price.toLocaleString()}
+                                <button onClick={() => handleEditProduct(p)}>
+                                    Editar
+                                </button>
+                                <button onClick={() => handleDeleteProduct(p._id)}>
+                                    Eliminar
+                                </button>
+                            </div>
+                        ))}
+                </div>
+            )}
         </div>
-      )}
-
-      {activeTab === 'tickets' && (
-        <div>
-          <h2>Tickets</h2>
-          <ul>
-            {tickets.map((t) => (
-              <li key={t._id}>{t.descripcion}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
+    );
 };
 
 export default Admin;
