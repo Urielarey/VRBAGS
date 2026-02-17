@@ -52,9 +52,9 @@ const Admin = () => {
                 getAuthHeaders()
             );
 
-            if (ticketResponse.data.status === "success") {
-                setTickets(ticketResponse.data.payload || []);
-            }
+            // if (ticketResponse.data.status === "success") {
+            //     setTickets(ticketResponse.data.payload || []);
+            // }
         } catch (error) {
             console.error("Error cargando datos:", error);
         } finally {
