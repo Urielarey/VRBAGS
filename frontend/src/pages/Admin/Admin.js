@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+
 import axios from "axios";
 import "./Admin.css";
+
+const API_URL = process.env.REACT_APP_API_URL || "http://localhost:3000/api";
 
 const Admin = () => {
     const navigate = useNavigate();
@@ -36,7 +39,7 @@ const Admin = () => {
         setLoading(true);
         try {
             const prodResponse = await axios.get(
-                "http://localhost:3000/api/products?limit=100",
+                `${API_URL}/products?limit=100`,
                 getAuthHeaders()
             );
 
@@ -45,7 +48,7 @@ const Admin = () => {
             }
 
             const ticketResponse = await axios.get(
-                "http://localhost:3000/api/tickets/all",
+                `${API_URL}/tickets/all`,
                 getAuthHeaders()
             );
 
@@ -67,6 +70,21 @@ const Admin = () => {
         loadData();
     }, [navigate, isAdmin, loadData]);
 
+    // Limpia el formulario y el producto en edición
+    const resetForm = () => {
+        setFormData({
+            title: "",
+            description: "",
+            code: "",
+            price: "",
+            stock: "",
+            category: "",
+            status: true,
+            thumbnails: "",
+        });
+        setEditingProduct(null);
+    };
+
     const handleSaveProduct = async (e) => {
         e.preventDefault();
 
@@ -80,14 +98,14 @@ const Admin = () => {
 
             if (editingProduct) {
                 await axios.put(
-                    `http://localhost:3000/api/products/${editingProduct._id}`,
+                    `${API_URL}/products/${editingProduct._id}`,
                     dataToSend,
                     getAuthHeaders()
                 );
                 alert("✅ Producto actualizado");
             } else {
                 await axios.post(
-                    "http://localhost:3000/api/products",
+                    `${API_URL}/products`,
                     dataToSend,
                     getAuthHeaders()
                 );
@@ -106,7 +124,7 @@ const Admin = () => {
 
         try {
             await axios.delete(
-                `http://localhost:3000/api/products/${pid}`,
+                `${API_URL}/products/${pid}`,
                 getAuthHeaders()
             );
             alert("✅ Producto eliminado");
