@@ -1,40 +1,34 @@
-import React, { useState, useEffect, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../../context/AuthContext';
-import axios from 'axios';
-import './Admin.css';
-
-const API_URL =
-  process.env.REACT_APP_API_URL ||
-  (process.env.NODE_ENV === "development"
-    ? "http://localhost:3000"
-    : "https://vrbags-backend-production.up.railway.app");
-
+import React, { useState, useEffect, useCallback } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import axios from "axios";
+import "./Admin.css";
 
 const Admin = () => {
   const navigate = useNavigate();
   const { user, isAdmin } = useAuth();
-  const [activeTab, setActiveTab] = useState('dashboard');
+
+  const [activeTab, setActiveTab] = useState("dashboard");
   const [products, setProducts] = useState([]);
   const [tickets, setTickets] = useState([]);
   const [editingProduct, setEditingProduct] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const [formData, setFormData] = useState({
-    title: '',
-    description: '',
-    code: '',
-    price: '',
-    stock: '',
-    category: '',
+    title: "",
+    description: "",
+    code: "",
+    price: "",
+    stock: "",
+    category: "",
     status: true,
-    thumbnails: ''
+    thumbnails: "",
   });
 
   const getAuthHeaders = useCallback(() => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     return {
-      headers: { Authorization: `Bearer ${token}` }
+      headers: { Authorization: `Bearer ${token}` },
     };
   }, []);
 
@@ -42,30 +36,24 @@ const Admin = () => {
     setLoading(true);
     try {
       const prodResponse = await axios.get(
-        `${API_URL}/api/products?limit=100`,
+        "http://localhost:3000/api/products?limit=100",
         getAuthHeaders()
       );
 
-      if (prodResponse.data.status === 'success') {
+      if (prodResponse.data.status === "success") {
         setProducts(prodResponse.data.payload);
       }
 
-      try {
-        const ticketResponse = await axios.get(
-          `${API_URL}/api/tickets/all`,
-          getAuthHeaders()
-        );
+      const ticketResponse = await axios.get(
+        "http://localhost:3000/api/tickets/all",
+        getAuthHeaders()
+      );
 
-        if (ticketResponse.data.status === 'success') {
-          setTickets(ticketResponse.data.payload || []);
-        }
-      } catch (err) {
-        console.error('Error cargando tickets:', err);
-        setTickets([]);
+      if (ticketResponse.data.status === "success") {
+        setTickets(ticketResponse.data.payload || []);
       }
-
     } catch (error) {
-      console.error('Error cargando datos:', error);
+      console.error("Error cargando datos:", error);
     } finally {
       setLoading(false);
     }
@@ -73,7 +61,7 @@ const Admin = () => {
 
   useEffect(() => {
     if (!isAdmin()) {
-      navigate('/');
+      navigate("/");
       return;
     }
     loadData();
@@ -87,63 +75,44 @@ const Admin = () => {
         ...formData,
         price: parseFloat(formData.price),
         stock: parseInt(formData.stock),
-        thumbnails: formData.thumbnails ? [formData.thumbnails] : []
+        thumbnails: formData.thumbnails ? [formData.thumbnails] : [],
       };
 
       if (editingProduct) {
         await axios.put(
-          `${API_URL}/api/products/${editingProduct._id}`,
+          `http://localhost:3000/api/products/${editingProduct._id}`,
           dataToSend,
           getAuthHeaders()
         );
-        alert('✅ Producto actualizado');
+        alert("✅ Producto actualizado");
       } else {
         await axios.post(
-          `${API_URL}/api/products`,
+          "http://localhost:3000/api/products",
           dataToSend,
           getAuthHeaders()
         );
-        alert('✅ Producto creado');
+        alert("✅ Producto creado");
       }
 
       resetForm();
       loadData();
-
     } catch (error) {
-      alert('❌ Error: ' + (error.response?.data?.message || error.message));
-    }
-  };
-
-  const handleUpdateTicketStatus = async (ticketId, newStatus) => {
-    try {
-      await axios.put(
-        `${API_URL}/api/tickets/${ticketId}/status`,
-        { status: newStatus },
-        getAuthHeaders()
-      );
-
-      await loadData();
-      alert('✅ Estado actualizado correctamente');
-
-    } catch (error) {
-      alert('❌ Error: ' + (error.response?.data?.message || error.message));
+      alert("❌ Error: " + (error.response?.data?.message || error.message));
     }
   };
 
   const handleDeleteProduct = async (pid) => {
-    if (!window.confirm('¿Estás seguro de que quieres eliminar este producto?')) return;
+    if (!window.confirm("¿Seguro que querés eliminar este producto?")) return;
 
     try {
       await axios.delete(
-        `${API_URL}/api/products/${pid}`,
+        `http://localhost:3000/api/products/${pid}`,
         getAuthHeaders()
       );
-
-      alert('✅ Producto eliminado');
+      alert("✅ Producto eliminado");
       loadData();
-
     } catch (error) {
-      alert('❌ Error: ' + error.response?.data?.message);
+      alert("❌ Error: " + (error.response?.data?.message || error.message));
     }
   };
 
@@ -157,29 +126,15 @@ const Admin = () => {
       stock: product.stock,
       category: product.category,
       status: product.status,
-      thumbnails: product.thumbnails?.[0] || ''
+      thumbnails: product.thumbnails?.[0] || "",
     });
-    setActiveTab('create-product');
-  };
-
-  const resetForm = () => {
-    setFormData({
-      title: '',
-      description: '',
-      code: '',
-      price: '',
-      stock: '',
-      category: '',
-      status: true,
-      thumbnails: ''
-    });
-    setEditingProduct(null);
+    setActiveTab("create-product");
   };
 
   const handleLogout = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    navigate('/');
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/");
     window.location.reload();
   };
 
@@ -189,7 +144,70 @@ const Admin = () => {
 
   return (
     <div className="admin-container">
-      {/* El resto del JSX queda exactamente igual */}
+      <div className="admin-header">
+        <h1>Panel de Control - VRBAGS</h1>
+        <div className="admin-user-info">
+          <span>
+            👤 {user.first_name} {user.last_name} (
+            {user.role.toUpperCase()})
+          </span>
+          <button
+            className="btn btn-danger btn-sm"
+            onClick={handleLogout}
+          >
+            Salir
+          </button>
+        </div>
+      </div>
+
+      <div className="admin-tabs">
+        <button
+          className={`tab-btn ${
+            activeTab === "dashboard" ? "active" : ""
+          }`}
+          onClick={() => setActiveTab("dashboard")}
+        >
+          📊 Dashboard
+        </button>
+
+        <button
+          className={`tab-btn ${
+            activeTab === "products" ? "active" : ""
+          }`}
+          onClick={() => setActiveTab("products")}
+        >
+          📦 Productos ({products.length})
+        </button>
+
+        <button
+          className={`tab-btn ${
+            activeTab === "create-product" ? "active" : ""
+          }`}
+          onClick={() => setActiveTab("create-product")}
+        >
+          ➕ Nuevo Producto
+        </button>
+      </div>
+
+      {loading ? (
+        <div className="loading">⏳ Cargando...</div>
+      ) : (
+        <div className="admin-content">
+          {activeTab === "products" &&
+            products.map((p) => (
+              <div key={p._id}>
+                <strong>{p.title}</strong> - $
+                {p.price.toLocaleString()}
+                <button onClick={() => handleEditProduct(p)}>
+                  Editar
+                </button>
+                <button onClick={() => handleDeleteProduct(p._id)}>
+                  Eliminar
+                </button>
+              </div>
+            ))}
+        </div>
+      )}
     </div>
   );
 };
