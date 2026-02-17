@@ -13,7 +13,7 @@ const Admin = () => {
 
     const [activeTab, setActiveTab] = useState("dashboard");
     const [products, setProducts] = useState([]);
-    // const [tickets, setTickets] = useState([]); // Eliminado para evitar warning no-unused-vars
+    const [tickets, setTickets] = useState([]);
     const [editingProduct, setEditingProduct] = useState(null);
     const [loading, setLoading] = useState(true);
 
@@ -51,10 +51,9 @@ const Admin = () => {
                 `${API_URL}/tickets/all`,
                 getAuthHeaders()
             );
-
-            // if (ticketResponse.data.status === "success") {
-            //     setTickets(ticketResponse.data.payload || []);
-            // }
+            if (ticketResponse.data.status === "success") {
+                setTickets(ticketResponse.data.payload || []);
+            }
         } catch (error) {
             console.error("Error cargando datos:", error);
         } finally {
@@ -85,7 +84,36 @@ const Admin = () => {
         setEditingProduct(null);
     };
 
-    // const handleSaveProduct = async (e) => { ... } // Eliminado para evitar warning no-unused-vars
+    const handleSaveProduct = async (e) => {
+        e.preventDefault();
+        try {
+            const dataToSend = {
+                ...formData,
+                price: parseFloat(formData.price),
+                stock: parseInt(formData.stock),
+                thumbnails: formData.thumbnails ? [formData.thumbnails] : [],
+            };
+            if (editingProduct) {
+                await axios.put(
+                    `${API_URL}/products/${editingProduct._id}`,
+                    dataToSend,
+                    getAuthHeaders()
+                );
+                alert("✅ Producto actualizado");
+            } else {
+                await axios.post(
+                    `${API_URL}/products`,
+                    dataToSend,
+                    getAuthHeaders()
+                );
+                alert("✅ Producto creado");
+            }
+            resetForm();
+            loadData();
+        } catch (error) {
+            alert("❌ Error: " + (error.response?.data?.message || error.message));
+        }
+    };
 
     const handleDeleteProduct = async (pid) => {
         if (!window.confirm("¿Seguro que querés eliminar este producto?")) return;
